@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="The curious incident of cbind() and c()">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-02-01">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://lihtium.github.io/website/post/2017-02-01-first-post/">
+    <meta property="og:site_name" content="Guanhua Li">
+    
+    <meta property="og:tags" content="R">
+    
+    <meta property="og:tags" content="Simulations">
+    
+    <meta property="og:tags" content="Curiousity">
+    
+    <meta name="generator" content="Hugo 0.18.1" />
+    <title>The curious incident of cbind() and c() &middot; Guanhua Li</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="https://lihtium.github.io/websitecss/style.css">
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Guanhua Li" />
+    
+    
+
+    
+    
+
+
+
+
+</head>
+    
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="https://lihtium.github.io/website">Guanhua Li</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="https://lihtium.github.io/website">Guanhua Li</a></h1>
+		
+		
+		
+			<small class="text-center center-block">Actuary</small>
+		
+		
+		
+		<div id="social" class="text-center">
+			<a href="https://twitter.com/lihtium"><i class="fa fa-twitter fa-2x"></i></a>
+			<a href="https://www.linkedin.com/"><i class="fa fa-linkedin fa-2x"></i></a>
+			<a href="https://github.com/lihtium"><i class="fa fa-github fa-2x"></i></a>
+			<a href="mailto:lihtium@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>The curious incident of cbind() and c()</h1>
+	</header>
+
+	<article>
+
+
+<div id="r-markdown" class="section level1">
+<h1>R Markdown</h1>
+<p>For this first blog post, I wanted to render some R Markdown code, see how this works and catch up with all the things I always wanted to do. But curiously, by doing so I bumped into some weird stuff about cbind() and c().</p>
+<p>So let’s start this journey with something easy, like plotting the distribution of a normal distribution.</p>
+<pre class="r"><code>normal.sample&lt;-rnorm(100,0,1)</code></pre>
+<p>Now that we have the sample, we can plot the histogram of the sample :</p>
+<pre class="r"><code>hist(normal.sample,
+     xlim=c(-3,3),
+     breaks=100,
+     probability = T)
+
+points(seq(-3,3,by=(3-(-3))/100),
+       dnorm(seq(-3,3,by=(3-(-3))/100),0,1))</code></pre>
+<p><img src="figures/hist-1.png" width="672" /></p>
+<pre class="r"><code>qqnorm(normal.sample)</code></pre>
+<p><img src="figures/hist-2.png" width="672" /></p>
+<pre class="r"><code>shapiro.test(normal.sample)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  normal.sample
+## W = 0.99482, p-value = 0.9701</code></pre>
+<pre class="r"><code>var(normal.sample)</code></pre>
+<pre><code>## [1] 1.060658</code></pre>
+<pre class="r"><code>mean(normal.sample)</code></pre>
+<pre><code>## [1] 0.06686328</code></pre>
+<p>It seems like 100 simulations are not enough, so why don’t we try with 10000 :</p>
+<pre class="r"><code>normal.sample&lt;-rnorm(10000,0,1)
+
+hist(normal.sample,
+     xlim=c(-3,3),
+     breaks=100,
+     probability = T)
+
+points(seq(-3,3,by=(3-(-3))/100),
+       dnorm(seq(-3,3,by=(3-(-3))/100),0,1))</code></pre>
+<p><img src="figures/rnorm%2010000-1.png" width="672" /></p>
+<pre class="r"><code>v&lt;-var(normal.sample)
+v</code></pre>
+<pre><code>## [1] 1.008404</code></pre>
+<pre class="r"><code>m&lt;-mean(normal.sample)
+m</code></pre>
+<pre><code>## [1] 0.0008420575</code></pre>
+<p>We see that the variance differs around 0.84%. As for the mean, we can see that it is 0.001.</p>
+<p>Now, here’s a trick : the standard normal distribution is a symetric distribution with mean=0, so if we take n simulations and extend them with the same n simulations but by multiplying them by -1, we should see better results for the first two moments.</p>
+<pre class="r"><code>normal.sample&lt;-rnorm(2500,0,1)
+
+hist(normal.sample,
+     xlim=c(-3,3),
+     breaks=100,
+     probability = T)</code></pre>
+<p><img src="figures/symetric-1.png" width="672" /></p>
+<pre class="r"><code>var(normal.sample)</code></pre>
+<pre><code>## [1] 0.9764315</code></pre>
+<pre class="r"><code>normal.sample&lt;-c(normal.sample,-normal.sample)
+
+hist(normal.sample,
+     xlim=c(-3,3),
+     breaks=100,
+     probability = T)
+
+points(seq(-3,3,by=(3-(-3))/100),
+       dnorm(seq(-3,3,by=(3-(-3))/100),0,1))</code></pre>
+<p><img src="figures/symetric-2.png" width="672" /></p>
+<pre class="r"><code>v&lt;-var(normal.sample)
+v</code></pre>
+<pre><code>## [1] 0.9762426</code></pre>
+<pre class="r"><code>mean(normal.sample)</code></pre>
+<pre><code>## [1] -3.469447e-22</code></pre>
+<p>Well, normally the mean should be equal to 0. Let’s recall how the mean is computed :</p>
+<p><span class="math inline">\(\bar{X} = \frac{1}{N} \sum_{i=1}^N X_i\)</span></p>
+<p>As we took normal.sample and it’s negative version (*-1), the sum shoud be 0 because <span class="math inline">\(X_i=-X_{2500+i}\)</span>.</p>
+<pre class="r"><code>normal.sample&lt;-round(normal.sample,digits=2)
+
+mean(normal.sample)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>var(normal.sample)</code></pre>
+<pre><code>## [1] 0.9763253</code></pre>
+<p>Ok, still doesn’t work :p the mean is not equal to 0, but very close!</p>
+<p>Let’s now try this</p>
+<pre class="r"><code>x&lt;-rnorm(2500,0,1)
+y&lt;- -x
+sum(x+y)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>sum(c(x,y))</code></pre>
+<pre><code>## [1] 8.673617e-18</code></pre>
+<p>Seems like the c function is making the weird things. Now what about cbind or rbind?</p>
+<pre class="r"><code>sum(cbind(x,y))</code></pre>
+<pre><code>## [1] 8.673617e-18</code></pre>
+<pre class="r"><code>sum(rbind(x,y))</code></pre>
+<pre><code>## [1] 0</code></pre>
+<p>Seems like rbind saves us from this little tiny error :).</p>
+<p>Guanhua</p>
+</div>
+
+
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" https://lihtium.github.io/website" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  
+  <script src="https://lihtium.github.io/website/js/App.js"></script>
+  
+</body>
+</html>

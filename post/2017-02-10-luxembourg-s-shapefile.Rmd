@@ -1,0 +1,68 @@
+---
+title: Luxembourg's shapefile
+author: "Guanhua Li"
+date: '2017-02-01'
+description: ''
+tags:
+- R
+- Shapefile
+- Luxembourg
+categories: R
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+knitr::opts_knit$set(root.dir="/Users/gli/Projects/shapefile")
+```
+# Luxembourg
+
+Luxembourg is a small country, around 2500 square kilometers. That's like a square of length $\sqrt{2500}=50$ km. Now that you know how big/small this country is, let's dive into it's spatial forms.
+
+## The data
+We will need two little databases. The first one is called addresses and can be downloaded at <>.
+
+The second one, are the shapefiles of the townships, called commune in french, or Gemeng in Luxembourgish. They can be downloaded at <>.
+
+Luxembourg did a great job at providing these files for free. All credit goes to them.
+
+For the sake of simplicity, I included the data in a folder at me repo <http://lihtium.github.com/shapefile>. You can also download them on their original website <><>.
+
+With the help of a several packages, R can read and process shapefiles.
+```{r shapefile, include=T}
+library(sp)
+library(rgeos)
+library(rgdal)
+
+
+address<-read.csv("./data/addresses.csv",
+                  sep=";",
+                  dec=".",
+                  encoding="UTF-8")
+
+communes<-readOGR("./data/LIMADM_COMMUNES.shp",
+                  layer="LIMADM_COMMUNES",
+                  encoding="UTF-8")
+```
+
+Don't forget to tell R which encoding to use, the files are encoded in french, so UTF-8 might be working.
+Somehow, it does not work for the shapefiles.
+
+Let's check their classes
+```{r classes, include=T}
+class(address)
+class(communes)
+```
+So, address is a data.frame and commune is SpatialPolygonsDataFrame.
+```{r cl, include=T}
+head(address)
+```
+
+Now that we have loaded the two databases, let's do a little plot
+
+```{r shapefile plot, include = T}
+plot(communes)
+```
+As you can see, Luxembourg looks like a little shoe.
+```{r houses plot, include = T}
+
+```
