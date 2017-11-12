@@ -1,0 +1,17 @@
+---
+title: Hello World
+author: Guanhua
+date: '2017-11-11'
+slug: first
+tags:
+  - NA
+---
+
+## First post
+
+This post exists only for testing purposes.
+```{r}
+print("Hello World.")
+```
+
+Guanhua.
