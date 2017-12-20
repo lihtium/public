@@ -3,11 +3,18 @@ title: Hello World
 author: Guanhua
 date: '2017-11-11'
 slug: first
+description : "This post exists only for testing purposes."
 tags:
   - NA
+autoThumbnailImage: TRUE
+thumbnailImagePosition: "left"
+#thumbnailImage: //d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg
+thumbnailImage : https://image.flaticon.com/icons/svg/432/432534.svg
+#coverImage: https://eiopa.europa.eu/Slides/SliderImage_03.png
+#metaAlignment: center
 ---
 
-## First post
+# First post
 
 This post exists only for testing purposes.
 ```{r}
@@ -15,3 +22,5 @@ print("Hello World.")
 ```
 
 Guanhua.
+
+Credits : Icon made by [Vectors Market](https://www.flaticon.com/authors/vectors-market).

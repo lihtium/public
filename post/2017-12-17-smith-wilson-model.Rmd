@@ -1,0 +1,341 @@
+---
+title: Smith-Wilson yield curves
+author: Guanhua
+date: '2017-12-17'
+slug: smith-wilson-yield-curves
+categories: []
+description: "Let's start this journey with the most basic, yet most important parameters of any solvency 2 calculations : the risk-free interest rate."
+tags:
+  - Interest rate
+  - Solvency 2
+autoThumbnailImage: TRUE
+thumbnailImagePosition: "left"
+#thumbnailImage: //d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg
+thumbnailImage : https://image.flaticon.com/icons/svg/639/639364.svg
+coverImage: https://eiopa.europa.eu/Slides/SliderImage_03.png
+metaAlignment: center
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.width=10, fig.height=5) 
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
+library(reshape2)
+colorpalet<-c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")
+```
+
+Let's start this journey with the most basic, yet most important "parameters" of any solvency 2 calculations : the risk-free interest rate. EIOPA, the european insurance and occupational pensions authority uses the Smith-Wilson model to publish the relevant risk free interest rate term structures, also called the RFR.
+
+<!--more-->
+
+According to article 77 of the [Solvency 2 directive](http://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009L0138-20140523&from=EN), the best estimate of technical provisions shall correspond to the probability-weighted average of future cash-flows, taking account of the time value of money (expected present value of future cash-flows), using the relevant risk-free interest rate term structure.
+$$Best\_Estimate=\mathbb{E}\left(\sum_{t≥0}Cashflow_t \cdot P(t)\right)$$
+where $P(t)$ is the price of a zero-coupon bond of maturity $t$ priced with the relevant risk free interest rate term structures as set out by EIOPA.
+
+# Smith-Wilson model
+This article is based on the work of the Financial Supervisory Authority of Norway, so feel free to check it out [here](http://www.ressources-actuarielles.net/EXT/ISFA/fp-isfa.nsf/2b0481298458b3d1c1256f8a0024c478/bd689cce9bb2aeb5c1257998001ede2b/$FILE/A_Technical_Note_on_the_Smith-Wilson_Method_100701.pdf).
+
+We assume that we have N interest related financial instruments as input and J different dates at which a cash payment has to be made on behalf of at least one of these instruments.
+
+  * We need the market prices $m_i$ of the instruments $i$ at valuation date, for $i \in [ 0,N ]$.
+  * cash payment dates $u_1,u_2,u_3,u_4, ...,u_J$ for the instruments,
+  * The cash-flows $c_{i,1},c_{i,2},c_{i,3},...,c_{i,J}$.
+
+The general pricing function at valuing time proposed by Smith and Wilson is :
+
+$$P(t)=e^{-ufr \cdot t}+\sum_{i=1}^N \zeta_i \cdot \left( \sum_{j=1}^J c_{i,j}\cdot W(t,u_j)\right)$$
+
+where
+
+$$\sum_{j=1}^J c_{i,j}\cdot W(t,u_j)=:K_i(t) $$
+is called the kernel functions. $W(t,u_j)$ is defined like this :
+
+$$W(t,u_j)=e^{-ufr\cdot (t+u_j)}\cdot \left[ \alpha\cdot \min(t,u_j) -0.5\cdot e^{-\alpha\cdot \max(t,u_j)}\cdot(e^{\alpha\cdot \min(t,u_j)}-e^{-\alpha\cdot\min(t,u_j)}) \right]$$
+We can clearly identify 2 different parameters that are :
+
+1. $ufr$ : the continously compounded ultimate forward rate, to be chosen outside the model. In the Solvency 2 framework, this rate is set to $ln(1+0.042)=0.04114194$.
+2. $\alpha$ : convergence speed rate (how fast will the rates converge to the ufr?) to be chosen outside the model. Let's assume for the moment that this value is $0.10$.
+
+
+The market price of a risk-free bond $i$ is basically the sum of its discounted coupons, i.e.
+
+$$m_i = \sum_{j=1}^Jc_{i,j}\cdot P(u_j)$$
+As you may have noticed, if we had the prices of all zero coupon bonds $P(u_j)$ then the work here would be over and we wouldn't have started this article in the first place. But we want to find a way to assess these prices and we will do this by inputing the general Smith Wilson pricing function in the formula above :
+
+$$
+\begin{aligned}
+m_i &= \sum_{j=1}^Jc_{i,j}\cdot P(u_j) \\
+    &= \sum_{j=1}^Jc_{i,j}\cdot \left[ e^{-ufr \cdot u_j}+\sum_{l=1}^N \zeta_l \cdot \left( \sum_{k=1}^J c_{i,k}\cdot W(u_j,u_k)\right) \right] \\
+    &= \sum_{j=1}^Jc_{i,j}\cdot e^{-ufr \cdot u_j}+ \left[ \sum_{l=1}^N \zeta_l \cdot \left( \sum_{k=1}^J c_{i,k}\cdot \sum_{j=1}^J \{c_{i,j}\cdot W(u_j,u_k)\}\right) \right] \\
+    &= \sum_{j=1}^Jc_{i,j}\cdot e^{-ufr \cdot u_j}+ \left[ \sum_{l=1}^N \left( \sum_{k=1}^J \left\{\sum_{j=1}^J c_{i,j}\cdot W(u_j,u_k)\right\}\cdot c_{i,k}\right) \cdot \zeta_l \right] \\
+\end{aligned}
+$$
+We thus have here the full system in vectorial notation
+
+$$
+\begin{aligned}
+  m &= C\cdot p  \\
+    &= C\cdot \mu+(CWC^T)\zeta \\
+    &= M(N\times N) \cdot M(N \times 1) + \left[M(N\times J)\cdot M(J \times J)\cdot M(J \times N)\right]\cdot M(N\times 1)\\
+    &= M(N\times 1)
+\end{aligned}
+$$
+with $\mu=(e^{-ufr\cdot u_1},e^{-ufr\cdot u_2},e^{-ufr\cdot u_3},...,e^{-ufr\cdot u_J})^T$. We can also check that this system makes sense by checking the dimensions of the matrices
+
+$$
+\begin{aligned}
+  C\cdot p &= C\cdot \mu+(CWC^T)\zeta \\
+  M(N\times N) \cdot M(N \times 1) &= M(N\times N) \cdot M(N \times 1) + \left[M(N\times J)\cdot M(J \times J)\cdot M(J \times N)\right]\cdot M(N\times 1)\\
+  M(N\times 1) &= M(N\times 1)
+\end{aligned}
+$$
+We can now figure out how to compute $\zeta = (CWC^T)^{-1}(m-C\cdot \mu)$.
+
+## Example
+
+Let's consider 4(=N) at par bonds with maturities 1,2,3,5 and coupons :
+
+```{r input,echo=FALSE}
+
+input<-data.frame(
+  Maturity = c(1,2,3,5),
+  Coupon = c(0.01,0.02,0.026,0.034),
+  Price = rep(1,4)
+)
+
+N<-nrow(input)
+J<-max(input$Maturity)
+
+C<-t(t(matrix(1:J,J,N))==input$Maturity)*1+ # Nominal
+  t(t(t(t(matrix(1:J,J,N))<=input$Maturity)*1)*(input$Coupon)) # Coupons
+
+print(input)
+
+```
+
+
+So $\max(Maturity)=5$ and thus $u_1=1,...,u_4=4,u_5=5$ even though we only have 4 bonds. We can also construct the cash-flow matrix :
+
+
+```{r C,echo=FALSE}
+
+CF<-data.frame(C)
+rownames(CF)<-paste("u",1:J,sep="")
+colnames(CF)<-paste("Bond_",1:N,sep="")
+
+T.mat<-t(matrix(1:J,J,J))
+U<-(matrix(1:J,J,J))
+
+print(CF)
+```
+
+
+## The W matrix
+
+Let's recall the formula here 
+$$W(t,u_j)=e^{-ufr\cdot (t+u_j)}\cdot \left[ \alpha\cdot \min(t,u_j) -0.5\cdot e^{-\alpha\cdot \max(t,u_j)}\cdot(e^{\alpha\cdot \min(t,u_j)}-e^{-\alpha\cdot\min(t,u_j)}) \right]$$
+
+In this section, we will see how easily we can build this $W$ matrix. First thing we can notice is that $W(t,u_j)=W(u_j,t)$, which means that $W$ will be a symmetric matrix in this case. We could build $W$ by using 2 for loops, i.e. for t = 1:T and for uj=1:J etc. but there's a much nicer way of building this W matrix.  
+Let t be represented by the columns of our matrix and $u_j$ the rows, in that case, we can build two matrices T.mat ($=t$) and U ($=u_j$)
+
+```{r T and U,echo=TRUE}
+
+print(T.mat)
+print(U)
+
+```
+Now that we have T.mat and U, we can compute $t+u_j$, $\min(t,u_j)$ and $\max(t,u_j)$
+
+```{r W,echo=TRUE}
+
+print(T.mat+U)
+min_tuj<-pmin(T.mat,U)
+max_tuj<-pmax(T.mat,U)
+print(min_tuj)
+print(max_tuj)
+```
+
+Let's recall the formula of $\zeta$ which is $\zeta = (CWC^T)^{-1}(m-C\cdot \mu)$. We now have $C$,$W$ and $\mu$.
+```{r zeta,echo=TRUE}
+
+
+ufr<-log(1+0.042)
+a<-0.1
+
+m<-input$Price
+W<-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*min_tuj)))
+
+mu<-exp(-ufr*(1:J))
+
+zeta<-solve(t(C)%*%W%*%C)%*%(m-t(C)%*%mu)
+print(W)
+print(mu)
+print(zeta)
+```
+
+Now that we have our zeta parameters we can build the whole curve, even for the maturities over $J$. For this, we will need to extend $W$, let's say we want to get the curve up to 50 years ($=K$).
+
+```{r Wextended,echo=TRUE}
+
+K<-50
+T.mat<-t(matrix(1:J,J,K))
+U<-(matrix(1:K,K,J))
+
+min_tuj<-pmin(T.mat,U)
+max_tuj<-pmax(T.mat,U)
+
+
+W<-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*min_tuj)))
+
+```
+
+Let's look at the shape of this extended W function :
+
+```{r Wextended.plot,echo=F}
+W.plot<-melt(data.frame(t=1:K,W),id.vars="t")
+names(W.plot)<-c("t","U_j","W(t,U_j)")
+levels(W.plot$U_j)<-c("1","2","3","4","5")
+ggplot(data=W.plot,aes(y=`W(t,U_j)`,x=t,color=U_j))+geom_point()+theme_minimal()+scale_color_manual(values=colorpalet)
+```
+
+As we can see, the values of $W(t,u_j)$ decrease as t increases, its effect on the final price $P(t)$ becomes less and less relevant.
+
+```{r Kernel,echo=F}
+K.plot<-melt(data.frame(t=1:K,W%*%(C)),id.vars="t")
+names(K.plot)<-c("t","Bond","K(Bond_i,t)")
+levels(K.plot$Bond)<-c("1","2","3","4")
+ggplot(data=K.plot,aes(y=`K(Bond_i,t)`,x=t,color=Bond))+geom_point()+theme_minimal()+scale_color_manual(values=colorpalet)
+```
+
+Just as stated above, as the effect of $W(t,u_j)$ decreases, the importance of the kernel functions $K_i(t) = \sum_{j=1}^J c_{i,j}\cdot W(t,u_j)$ also decreases. 
+
+Let's split the function 
+$$P(t)=\underbrace{e^{-ufr \cdot t}}_{A}+\underbrace{\sum_{i=1}^N \zeta_i \cdot \left( \sum_{j=1}^J c_{i,j}\cdot W(t,u_j)\right)}_{B}$$ 
+into two parts and plot their values on a graph.
+
+```{r zeta.extended,echo=F}
+Z.plot<-melt(data.frame(t=1:K,
+                        A=exp(-ufr*(1:K)),
+                        B=W%*%(C)%*%zeta,
+                        `P`=exp(-ufr*(1:K))+W%*%(C)%*%zeta
+                        ),id.vars = "t"
+             )
+
+ggplot(data=Z.plot,aes(y=`value`,x=t,color=variable))+geom_point()+theme_minimal()+scale_color_manual(values=colorpalet)
+```
+
+We see that the values of $B$ are almost negligible after a certain maturity $t$ and thus $P(t)$ converges to $A$.
+The interest rates converge therefore to the planned ultimate forward rate of $4.2%$ annually compounded.
+
+```{r Pt,echo=F}
+Pt<-(exp(-ufr*1:K))+
+  W%*%(C)%*%zeta
+rt<-data.frame(`Interest rate`=(1/Pt)^(1/(1:K))-1,
+               Maturity=1:K)
+
+ggplot(data=rt,aes(y=`Interest.rate`,x=Maturity))+geom_point()+theme_minimal()+geom_line()+scale_color_manual(values=colorpalet)
+```
+
+Now let's wrap this neatly into a function and plot the impact of different alphas.
+
+```{r function, echo=FALSE}
+
+SW<-function(input,ufr,a,K){
+  
+  # Parameters
+  N<-nrow(input)
+  J<-max(input$Maturity)
+
+  # Calibration of zeta
+  C<-t(t(matrix(1:J,J,N))==input$Maturity)*1+ # Nominal
+  t(t(t(t(matrix(1:J,J,N))<=input$Maturity)*1)*(input$Coupon)) # Coupons
+  
+  T.mat<-t(matrix(1:J,J,J))
+  U<-(matrix(1:J,J,J))
+  
+  min_tuj<-pmin(T.mat,U)
+  max_tuj<-pmax(T.mat,U)
+  
+  m<-input$Price
+  W<-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*min_tuj)))
+  
+  mu<-exp(-ufr*(1:J))
+  
+  zeta<-solve(t(C)%*%W%*%C)%*%(m-t(C)%*%mu)
+  
+  # Estimation of the term structure of interest rates
+  
+  T.mat<-t(matrix(1:J,J,K))
+  U<-(matrix(1:K,K,J))
+  
+  min_tuj<-pmin(T.mat,U)
+  max_tuj<-pmax(T.mat,U)
+  
+  
+  W<-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*min_tuj)))
+  
+  Pt<-(exp(-ufr*1:K))+W%*%(C)%*%zeta
+  
+  rt<-data.frame(`Interest rate`=(1/Pt)^(1/(1:K))-1,
+                 Maturity=1:K,
+                 alpha=a,
+                 `ufr`=exp(log(1+ufr))-1
+                 )
+  
+  return(rt)
+
+
+}
+
+rt<-SW(input,log(1+0.042),0.01,K)
+  for(i in 0:7){rt<-rbind.data.frame(rt,SW(input,log(1+0.042),0.01+i*0.02,K))}
+rt$alpha<-as.factor(rt$alpha)  
+  ggplot(data=rt,aes(y=`Interest.rate`,x=Maturity,color=(alpha)))+
+    geom_line()+
+    geom_point()+
+    theme_minimal()+
+    geom_hline(yintercept=0.042)+scale_color_manual(values=colorpalet)
+
+if(FALSE){
+  
+input<-read.csv("./data/Par.Yields.csv",header=T,sep=";",dec=",")
+rt<-SW(input,log(1+0.042),0.01,150)
+
+#ggplot(data=SW(input,log(1+0.042),0.12,60),aes(y=`Interest.rate`,x=Maturity,color=as.factor(alpha)))+geom_line()+geom_point()+theme_economist()+geom_hline(yintercept=0.042)
+#SW(input,log(1+0.042),0.13,60)
+  
+}
+
+```
+
+Just as expected, $\alpha$ changes the speed at which the rates converge to the annually compounded ultimate forward rate.
+
+## The ultimate forward rate
+
+Let's now assume that we have these risk-free bonds and plot the corresponding interest rates according to different ufr.
+```{r Bund,echo=F}
+
+input<-data.frame(
+  Maturity = c(2,3,4,5,6,7,8,9,10,15,20),
+  Coupon = c(-.696,-.571,-.425,-.3,-.158,-.036,.076,.224,.305,.688,.854)/100,
+  Price = rep(1,11)
+)
+
+print(input)
+
+bunds<-SW(input,log(1-0.01),0.1,K)
+  for(i in 0:5){bunds<-rbind.data.frame(bunds,SW(input,log(1+0.01*i),0.1,K))}
+bunds$ufr<-as.factor(round(bunds$ufr,2))
+ggplot(data=bunds,
+       aes(y=`Interest.rate`,x=Maturity,color=ufr))+geom_point()+theme_minimal()+scale_color_manual(values=colorpalet)
+
+```
+
+We can see that the curve is relatively similar up to the last liquid point of 20 years and has a little bump, just like the EIOPA term structure, when the ufr is significantly higher than the highest known spot rate (5% compared to 0.852% in this case).
+
+Thanks for reading!
+
+**END**
+
+Credits : Icon made by [Dimitry Miroliubov](https://www.flaticon.com/authors/dimitry-miroliubov).

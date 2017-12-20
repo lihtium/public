@@ -1,0 +1,741 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.30.2 with theme Tranquilpeak 0.4.2-BETA">
+    <title>Smith-Wilson yield curves</title>
+    <meta name="author" content="Guanhua Li">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+    <meta name="description" content="Let&#39;s start this journey with the most basic, yet most important parameters of any solvency 2 calculations : the risk-free interest rate.">
+    <meta property="og:description" content="Let&#39;s start this journey with the most basic, yet most important parameters of any solvency 2 calculations : the risk-free interest rate.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Smith-Wilson yield curves">
+    <meta property="og:url" content="/2017/12/smith-wilson-yield-curves/">
+    <meta property="og:site_name" content="Guanhua&#39;s blog">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Guanhua&#39;s blog">
+    <meta name="twitter:description" content="Let&#39;s start this journey with the most basic, yet most important parameters of any solvency 2 calculations : the risk-free interest rate.">
+    
+      <meta name="twitter:creator" content="@lihtium">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png">
+    
+
+    
+      <meta property="og:image" content="https://image.flaticon.com/icons/svg/639/639364.svg">
+    
+    
+      <meta property="og:image" content="https://eiopa.europa.eu/Slides/SliderImage_03.png">
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Guanhua&#39;s blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Guanhua Li</h4>
+        
+          <h5 class="sidebar-profile-bio">Been there, done that &hellip;</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/guanhuali">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('https://eiopa.europa.eu/Slides/SliderImage_03.png')"
+       data-behavior="4">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      Smith-Wilson yield curves
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-12-17T00:00:00Z">
+        
+  December 17, 2017
+
+      </time>
+    
+    
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="4"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>Let’s start this journey with the most basic, yet most important “parameters” of any solvency 2 calculations : the risk-free interest rate. EIOPA, the european insurance and occupational pensions authority uses the Smith-Wilson model to publish the relevant risk free interest rate term structures, also called the RFR.</p>
+<!--more-->
+<p>According to article 77 of the <a href="http://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009L0138-20140523&amp;from=EN">Solvency 2 directive</a>, the best estimate of technical provisions shall correspond to the probability-weighted average of future cash-flows, taking account of the time value of money (expected present value of future cash-flows), using the relevant risk-free interest rate term structure. <span class="math display">\[Best\_Estimate=\mathbb{E}\left(\sum_{t≥0}Cashflow_t \cdot P(t)\right)\]</span> where <span class="math inline">\(P(t)\)</span> is the price of a zero-coupon bond of maturity <span class="math inline">\(t\)</span> priced with the relevant risk free interest rate term structures as set out by EIOPA.</p>
+<div id="smith-wilson-model" class="section level1">
+<h1>Smith-Wilson model</h1>
+<p>This article is based on the work of the Financial Supervisory Authority of Norway, so feel free to check it out <a href="http://www.ressources-actuarielles.net/EXT/ISFA/fp-isfa.nsf/2b0481298458b3d1c1256f8a0024c478/bd689cce9bb2aeb5c1257998001ede2b/$FILE/A_Technical_Note_on_the_Smith-Wilson_Method_100701.pdf">here</a>.</p>
+<p>We assume that we have N interest related financial instruments as input and J different dates at which a cash payment has to be made on behalf of at least one of these instruments.</p>
+<ul>
+<li>We need the market prices <span class="math inline">\(m_i\)</span> of the instruments <span class="math inline">\(i\)</span> at valuation date, for <span class="math inline">\(i \in [ 0,N ]\)</span>.</li>
+<li>cash payment dates <span class="math inline">\(u_1,u_2,u_3,u_4, ...,u_J\)</span> for the instruments,</li>
+<li>The cash-flows <span class="math inline">\(c_{i,1},c_{i,2},c_{i,3},...,c_{i,J}\)</span>.</li>
+</ul>
+<p>The general pricing function at valuing time proposed by Smith and Wilson is :</p>
+<p><span class="math display">\[P(t)=e^{-ufr \cdot t}+\sum_{i=1}^N \zeta_i \cdot \left( \sum_{j=1}^J c_{i,j}\cdot W(t,u_j)\right)\]</span></p>
+<p>where</p>
+<p><span class="math display">\[\sum_{j=1}^J c_{i,j}\cdot W(t,u_j)=:K_i(t) \]</span> is called the kernel functions. <span class="math inline">\(W(t,u_j)\)</span> is defined like this :</p>
+<p><span class="math display">\[W(t,u_j)=e^{-ufr\cdot (t+u_j)}\cdot \left[ \alpha\cdot \min(t,u_j) -0.5\cdot e^{-\alpha\cdot \max(t,u_j)}\cdot(e^{\alpha\cdot \min(t,u_j)}-e^{-\alpha\cdot\min(t,u_j)}) \right]\]</span> We can clearly identify 2 different parameters that are :</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(ufr\)</span> : the continously compounded ultimate forward rate, to be chosen outside the model. In the Solvency 2 framework, this rate is set to <span class="math inline">\(ln(1+0.042)=0.04114194\)</span>.</li>
+<li><span class="math inline">\(\alpha\)</span> : convergence speed rate (how fast will the rates converge to the ufr?) to be chosen outside the model. Let’s assume for the moment that this value is <span class="math inline">\(0.10\)</span>.</li>
+</ol>
+<p>The market price of a risk-free bond <span class="math inline">\(i\)</span> is basically the sum of its discounted coupons, i.e.</p>
+<p><span class="math display">\[m_i = \sum_{j=1}^Jc_{i,j}\cdot P(u_j)\]</span> As you may have noticed, if we had the prices of all zero coupon bonds <span class="math inline">\(P(u_j)\)</span> then the work here would be over and we wouldn’t have started this article in the first place. But we want to find a way to assess these prices and we will do this by inputing the general Smith Wilson pricing function in the formula above :</p>
+<p><span class="math display">\[
+\begin{aligned}
+m_i &amp;= \sum_{j=1}^Jc_{i,j}\cdot P(u_j) \\
+    &amp;= \sum_{j=1}^Jc_{i,j}\cdot \left[ e^{-ufr \cdot u_j}+\sum_{l=1}^N \zeta_l \cdot \left( \sum_{k=1}^J c_{i,k}\cdot W(u_j,u_k)\right) \right] \\
+    &amp;= \sum_{j=1}^Jc_{i,j}\cdot e^{-ufr \cdot u_j}+ \left[ \sum_{l=1}^N \zeta_l \cdot \left( \sum_{k=1}^J c_{i,k}\cdot \sum_{j=1}^J \{c_{i,j}\cdot W(u_j,u_k)\}\right) \right] \\
+    &amp;= \sum_{j=1}^Jc_{i,j}\cdot e^{-ufr \cdot u_j}+ \left[ \sum_{l=1}^N \left( \sum_{k=1}^J \left\{\sum_{j=1}^J c_{i,j}\cdot W(u_j,u_k)\right\}\cdot c_{i,k}\right) \cdot \zeta_l \right] \\
+\end{aligned}
+\]</span> We thus have here the full system in vectorial notation</p>
+<p><span class="math display">\[
+\begin{aligned}
+  m &amp;= C\cdot p  \\
+    &amp;= C\cdot \mu+(CWC^T)\zeta \\
+    &amp;= M(N\times N) \cdot M(N \times 1) + \left[M(N\times J)\cdot M(J \times J)\cdot M(J \times N)\right]\cdot M(N\times 1)\\
+    &amp;= M(N\times 1)
+\end{aligned}
+\]</span> with <span class="math inline">\(\mu=(e^{-ufr\cdot u_1},e^{-ufr\cdot u_2},e^{-ufr\cdot u_3},...,e^{-ufr\cdot u_J})^T\)</span>. We can also check that this system makes sense by checking the dimensions of the matrices</p>
+<p><span class="math display">\[
+\begin{aligned}
+  C\cdot p &amp;= C\cdot \mu+(CWC^T)\zeta \\
+  M(N\times N) \cdot M(N \times 1) &amp;= M(N\times N) \cdot M(N \times 1) + \left[M(N\times J)\cdot M(J \times J)\cdot M(J \times N)\right]\cdot M(N\times 1)\\
+  M(N\times 1) &amp;= M(N\times 1)
+\end{aligned}
+\]</span> We can now figure out how to compute <span class="math inline">\(\zeta = (CWC^T)^{-1}(m-C\cdot \mu)\)</span>.</p>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<p>Let’s consider 4(=N) at par bonds with maturities 1,2,3,5 and coupons :</p>
+<pre><code>##   Maturity Coupon Price
+## 1        1  0.010     1
+## 2        2  0.020     1
+## 3        3  0.026     1
+## 4        5  0.034     1</code></pre>
+<p>So <span class="math inline">\(\max(Maturity)=5\)</span> and thus <span class="math inline">\(u_1=1,...,u_4=4,u_5=5\)</span> even though we only have 4 bonds. We can also construct the cash-flow matrix :</p>
+<pre><code>##    Bond_1 Bond_2 Bond_3 Bond_4
+## u1   1.01   0.02  0.026  0.034
+## u2   0.00   1.02  0.026  0.034
+## u3   0.00   0.00  1.026  0.034
+## u4   0.00   0.00  0.000  0.034
+## u5   0.00   0.00  0.000  1.034</code></pre>
+</div>
+<div id="the-w-matrix" class="section level2">
+<h2>The W matrix</h2>
+<p>Let’s recall the formula here <span class="math display">\[W(t,u_j)=e^{-ufr\cdot (t+u_j)}\cdot \left[ \alpha\cdot \min(t,u_j) -0.5\cdot e^{-\alpha\cdot \max(t,u_j)}\cdot(e^{\alpha\cdot \min(t,u_j)}-e^{-\alpha\cdot\min(t,u_j)}) \right]\]</span></p>
+<p>In this section, we will see how easily we can build this <span class="math inline">\(W\)</span> matrix. First thing we can notice is that <span class="math inline">\(W(t,u_j)=W(u_j,t)\)</span>, which means that <span class="math inline">\(W\)</span> will be a symmetric matrix in this case. We could build <span class="math inline">\(W\)</span> by using 2 for loops, i.e. for t = 1:T and for uj=1:J etc. but there’s a much nicer way of building this W matrix.<br />
+Let t be represented by the columns of our matrix and <span class="math inline">\(u_j\)</span> the rows, in that case, we can build two matrices T.mat (<span class="math inline">\(=t\)</span>) and U (<span class="math inline">\(=u_j\)</span>)</p>
+<pre class="r"><code>print(T.mat)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    2    3    4    5
+## [2,]    1    2    3    4    5
+## [3,]    1    2    3    4    5
+## [4,]    1    2    3    4    5
+## [5,]    1    2    3    4    5</code></pre>
+<pre class="r"><code>print(U)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    1    1    1    1
+## [2,]    2    2    2    2    2
+## [3,]    3    3    3    3    3
+## [4,]    4    4    4    4    4
+## [5,]    5    5    5    5    5</code></pre>
+<p>Now that we have T.mat and U, we can compute <span class="math inline">\(t+u_j\)</span>, <span class="math inline">\(\min(t,u_j)\)</span> and <span class="math inline">\(\max(t,u_j)\)</span></p>
+<pre class="r"><code>print(T.mat+U)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    2    3    4    5    6
+## [2,]    3    4    5    6    7
+## [3,]    4    5    6    7    8
+## [4,]    5    6    7    8    9
+## [5,]    6    7    8    9   10</code></pre>
+<pre class="r"><code>min_tuj&lt;-pmin(T.mat,U)
+max_tuj&lt;-pmax(T.mat,U)
+print(min_tuj)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    1    1    1    1
+## [2,]    1    2    2    2    2
+## [3,]    1    2    3    3    3
+## [4,]    1    2    3    4    4
+## [5,]    1    2    3    4    5</code></pre>
+<pre class="r"><code>print(max_tuj)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    2    3    4    5
+## [2,]    2    2    3    4    5
+## [3,]    3    3    3    4    5
+## [4,]    4    4    4    4    5
+## [5,]    5    5    5    5    5</code></pre>
+<p>Let’s recall the formula of <span class="math inline">\(\zeta\)</span> which is <span class="math inline">\(\zeta = (CWC^T)^{-1}(m-C\cdot \mu)\)</span>. We now have <span class="math inline">\(C\)</span>,<span class="math inline">\(W\)</span> and <span class="math inline">\(\mu\)</span>.</p>
+<pre class="r"><code>ufr&lt;-log(1+0.042)
+a&lt;-0.1
+
+m&lt;-input$Price
+W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*min_tuj)))
+
+mu&lt;-exp(-ufr*(1:J))
+
+zeta&lt;-solve(t(C)%*%W%*%C)%*%(m-t(C)%*%mu)
+print(W)</code></pre>
+<pre><code>##            [,1]       [,2]       [,3]       [,4]       [,5]
+## [1,] 0.00862561 0.01590149 0.02188057 0.02674724 0.03066104
+## [2,] 0.01590149 0.02982485 0.04139268 0.05081327 0.05839446
+## [3,] 0.02188057 0.04139268 0.05813003 0.07188306 0.08296295
+## [4,] 0.02674724 0.05081327 0.07188306 0.08970176 0.10417950
+## [5,] 0.03066104 0.05839446 0.08296295 0.10417950 0.12189849</code></pre>
+<pre class="r"><code>print(mu)</code></pre>
+<pre><code>## [1] 0.9596929 0.9210105 0.8838872 0.8482603 0.8140694</code></pre>
+<pre class="r"><code>print(zeta)</code></pre>
+<pre><code>##            [,1]
+## [1,]  57.790688
+## [2,] -33.507208
+## [3,]  11.396473
+## [4,]  -5.466968</code></pre>
+<p>Now that we have our zeta parameters we can build the whole curve, even for the maturities over <span class="math inline">\(J\)</span>. For this, we will need to extend <span class="math inline">\(W\)</span>, let’s say we want to get the curve up to 50 years (<span class="math inline">\(=K\)</span>).</p>
+<pre class="r"><code>K&lt;-50
+T.mat&lt;-t(matrix(1:J,J,K))
+U&lt;-(matrix(1:K,K,J))
+
+min_tuj&lt;-pmin(T.mat,U)
+max_tuj&lt;-pmax(T.mat,U)
+
+
+W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*min_tuj)))</code></pre>
+<p>Let’s look at the shape of this extended W function :</p>
+<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/Wextended.plot-1.png" width="960" /></p>
+<p>As we can see, the values of <span class="math inline">\(W(t,u_j)\)</span> decrease as t increases, its effect on the final price <span class="math inline">\(P(t)\)</span> becomes less and less relevant.</p>
+<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/Kernel-1.png" width="960" /></p>
+<p>Just as stated above, as the effect of <span class="math inline">\(W(t,u_j)\)</span> decreases, the importance of the kernel functions <span class="math inline">\(K_i(t) = \sum_{j=1}^J c_{i,j}\cdot W(t,u_j)\)</span> also decreases.</p>
+<p>Let’s split the function <span class="math display">\[P(t)=\underbrace{e^{-ufr \cdot t}}_{A}+\underbrace{\sum_{i=1}^N \zeta_i \cdot \left( \sum_{j=1}^J c_{i,j}\cdot W(t,u_j)\right)}_{B}\]</span> into two parts and plot their values on a graph.</p>
+<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/zeta.extended-1.png" width="960" /></p>
+<p>We see that the values of <span class="math inline">\(B\)</span> are almost negligible after a certain maturity <span class="math inline">\(t\)</span> and thus <span class="math inline">\(P(t)\)</span> converges to <span class="math inline">\(A\)</span>. The interest rates converge therefore to the planned ultimate forward rate of <span class="math inline">\(4.2%\)</span> annually compounded.</p>
+<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/Pt-1.png" width="960" /></p>
+<p>Now let’s wrap this neatly into a function and plot the impact of different alphas.</p>
+<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/function-1.png" width="960" /></p>
+<p>Just as expected, <span class="math inline">\(\alpha\)</span> changes the speed at which the rates converge to the annually compounded ultimate forward rate.</p>
+</div>
+<div id="the-ultimate-forward-rate" class="section level2">
+<h2>The ultimate forward rate</h2>
+<p>Let’s now assume that we have these risk-free bonds and plot the corresponding interest rates according to different ufr.</p>
+<pre><code>##    Maturity   Coupon Price
+## 1         2 -0.00696     1
+## 2         3 -0.00571     1
+## 3         4 -0.00425     1
+## 4         5 -0.00300     1
+## 5         6 -0.00158     1
+## 6         7 -0.00036     1
+## 7         8  0.00076     1
+## 8         9  0.00224     1
+## 9        10  0.00305     1
+## 10       15  0.00688     1
+## 11       20  0.00854     1</code></pre>
+<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/Bund-1.png" width="960" /></p>
+<p>We can see that the curve is relatively similar up to the last liquid point of 20 years and has a little bump, just like the EIOPA term structure, when the ufr is significantly higher than the highest known spot rate (5% compared to 0.852% in this case).</p>
+<p>Thanks for reading!</p>
+<p><strong>END</strong></p>
+<p>Credits : Icon made by <a href="https://www.flaticon.com/authors/dimitry-miroliubov">Dimitry Miroliubov</a>.</p>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/interest-rate/">Interest rate</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/solvency-2/">Solvency 2</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/first/" data-tooltip="Hello World">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2017/12/smith-wilson-yield-curves/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2017/12/smith-wilson-yield-curves/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2017/12/smith-wilson-yield-curves/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2017 Guanhua Li. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/first/" data-tooltip="Hello World">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2017/12/smith-wilson-yield-curves/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2017/12/smith-wilson-yield-curves/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2017/12/smith-wilson-yield-curves/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2017%2F12%2Fsmith-wilson-yield-curves%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2017%2F12%2Fsmith-wilson-yield-curves%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2017%2F12%2Fsmith-wilson-yield-curves%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Guanhua Li</h4>
+    
+      <div id="about-card-bio">Been there, done that &hellip;</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Actuary in a digital world
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Luxembourg
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2017/12/smith-wilson-yield-curves/">
+                <h3 class="media-heading">Smith-Wilson yield curves</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Let’s start this journey with the most basic, yet most important “parameters” of any solvency 2 calculations : the risk-free interest rate. EIOPA, the european insurance and occupational pensions authority uses the Smith-Wilson model to publish the relevant risk free interest rate term structures, also called the RFR.
+ According to article 77 of the Solvency 2 directive, the best estimate of technical provisions shall correspond to the probability-weighted average of future cash-flows, taking account of the time value of money (expected present value of future cash-flows), using the relevant risk-free interest rate term structure.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2017/11/first/">
+                <h3 class="media-heading">Hello World</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">First post This post exists only for testing purposes.
+print(&quot;Hello World.&quot;) ## [1] &quot;Hello World.&quot; Guanhua.
+Credits : Icon made by Vectors Market.
+ </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         2 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/cover-v1.2.0.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+    <script src="//yihui.name/js/math-code.js"></script>
+<script async
+src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+  </body>
+</html>
+
