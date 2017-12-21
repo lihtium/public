@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Na on Guanhua&#39;s blog</title>
-    <link>gli.lu/tags/na/</link>
+    <link>/tags/na/</link>
     <description>Recent content in Na on Guanhua&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 11 Nov 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="gli.lu/tags/na/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/na/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hello World</title>
-      <link>gli.lu/2017/11/first/</link>
+      <link>/2017/11/first/</link>
       <pubDate>Sat, 11 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>gli.lu/2017/11/first/</guid>
+      <guid>/2017/11/first/</guid>
       <description>First post This post exists only for testing purposes.
 print(&amp;quot;Hello World.&amp;quot;) ## [1] &amp;quot;Hello World.&amp;quot; Guanhua.
 Credits : Icon made by Vectors Market.

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Interest Rate on Guanhua&#39;s blog</title>
-    <link>gli.lu/tags/interest-rate/</link>
+    <link>/tags/interest-rate/</link>
     <description>Recent content in Interest Rate on Guanhua&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 17 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="gli.lu/tags/interest-rate/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/interest-rate/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Smith-Wilson yield curves</title>
-      <link>gli.lu/2017/12/smith-wilson-yield-curves/</link>
+      <link>/2017/12/smith-wilson-yield-curves/</link>
       <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>gli.lu/2017/12/smith-wilson-yield-curves/</guid>
+      <guid>/2017/12/smith-wilson-yield-curves/</guid>
       <description>Let’s start this journey with the most basic, yet most important “parameters” of any solvency 2 calculations : the risk-free interest rate. EIOPA, the european insurance and occupational pensions authority uses the Smith-Wilson model to publish the relevant risk free interest rate term structures, also called the RFR.
  According to article 77 of the Solvency 2 directive, the best estimate of technical provisions shall correspond to the probability-weighted average of future cash-flows, taking account of the time value of money (expected present value of future cash-flows), using the relevant risk-free interest rate term structure.</description>
     </item>

@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Guanhua&#39;s blog</title>
-    <link>gli.lu/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Guanhua&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 17 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="gli.lu/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Interest Rate</title>
-      <link>gli.lu/tags/interest-rate/</link>
+      <link>/tags/interest-rate/</link>
       <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>gli.lu/tags/interest-rate/</guid>
+      <guid>/tags/interest-rate/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Me</title>
-      <link>gli.lu/tags/me/</link>
+      <link>/tags/me/</link>
       <pubDate>Sat, 11 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>gli.lu/tags/me/</guid>
+      <guid>/tags/me/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Na</title>
-      <link>gli.lu/tags/na/</link>
+      <link>/tags/na/</link>
       <pubDate>Sat, 11 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>gli.lu/tags/na/</guid>
+      <guid>/tags/na/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Solvency 2</title>
-      <link>gli.lu/tags/solvency-2/</link>
+      <link>/tags/solvency-2/</link>
       <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>gli.lu/tags/solvency-2/</guid>
+      <guid>/tags/solvency-2/</guid>
       <description></description>
     </item>
     
