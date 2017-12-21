@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Me on Guanhua&#39;s blog</title>
-    <link>/tags/me/</link>
+    <link>gli.lu/tags/me/</link>
     <description>Recent content in Me on Guanhua&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 11 Nov 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/me/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="gli.lu/tags/me/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About me</title>
-      <link>/me/about-me/</link>
+      <link>gli.lu/me/about-me/</link>
       <pubDate>Sat, 11 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/me/about-me/</guid>
+      <guid>gli.lu/me/about-me/</guid>
       <description>Education and Work experience I grew up in Luxembourg, a small western european country and studied in Strasbourg (UdS) and eventually graduated in 2012. Now I live in Luxembourg and work as an actuary for a local insurance company. I had the opportunity to work on several non-life and life insurance topic before going over to asset and liability management.
 In order to work effectively with the finance department, I also attented a course in stochastic finance at UCL in Belgium.</description>
     </item>

@@ -24,7 +24,7 @@
     <meta name="author" content="Guanhua Li">
     <meta name="keywords" content="">
 
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="gli.lu/favicon.png">
     
 
     
@@ -65,7 +65,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    <link rel="stylesheet" href="gli.lu/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
     
     
 
@@ -80,12 +80,12 @@
       <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="/">Guanhua&#39;s blog</a>
+    <a class="header-title-link" href="gli.lu/">Guanhua&#39;s blog</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="/#about">
+         href="gli.lu/#about">
     
     
     
@@ -101,7 +101,7 @@
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="/#about">
+        <a href="gli.lu/#about">
           <img class="sidebar-profile-picture" src="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png" alt="Author&#39;s picture" />
         </a>
         <h4 class="sidebar-profile-name">Guanhua Li</h4>
@@ -114,7 +114,7 @@
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/">
+      <a class="sidebar-button-link " href="gli.lu/">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -124,7 +124,7 @@
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/categories">
+      <a class="sidebar-button-link " href="gli.lu/categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -134,7 +134,7 @@
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/tags">
+      <a class="sidebar-button-link " href="gli.lu/tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -144,7 +144,7 @@
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/archives">
+      <a class="sidebar-button-link " href="gli.lu/archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -154,7 +154,7 @@
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/#about">
+      <a class="sidebar-button-link " href="gli.lu/#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -168,7 +168,7 @@
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/https://www.linkedin.com/in/guanhuali">
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/guanhuali" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -182,7 +182,7 @@
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/index.xml">
+      <a class="sidebar-button-link " href="gli.lu/index.xml">
     
       <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
       
@@ -375,16 +375,16 @@ max_tuj&lt;-pmax(T.mat,U)
 
 W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*min_tuj)))</code></pre>
 <p>Let’s look at the shape of this extended W function :</p>
-<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/Wextended.plot-1.png" width="960" /></p>
+<p><img src="gli.lu/gli.lupost/2017-12-17-smith-wilson-model_files/figure-html/Wextended.plot-1.png" width="960" /></p>
 <p>As we can see, the values of <span class="math inline">\(W(t,u_j)\)</span> decrease as t increases, its effect on the final price <span class="math inline">\(P(t)\)</span> becomes less and less relevant.</p>
-<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/Kernel-1.png" width="960" /></p>
+<p><img src="gli.lu/gli.lupost/2017-12-17-smith-wilson-model_files/figure-html/Kernel-1.png" width="960" /></p>
 <p>Just as stated above, as the effect of <span class="math inline">\(W(t,u_j)\)</span> decreases, the importance of the kernel functions <span class="math inline">\(K_i(t) = \sum_{j=1}^J c_{i,j}\cdot W(t,u_j)\)</span> also decreases.</p>
 <p>Let’s split the function <span class="math display">\[P(t)=\underbrace{e^{-ufr \cdot t}}_{A}+\underbrace{\sum_{i=1}^N \zeta_i \cdot \left( \sum_{j=1}^J c_{i,j}\cdot W(t,u_j)\right)}_{B}\]</span> into two parts and plot their values on a graph.</p>
-<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/zeta.extended-1.png" width="960" /></p>
+<p><img src="gli.lu/gli.lupost/2017-12-17-smith-wilson-model_files/figure-html/zeta.extended-1.png" width="960" /></p>
 <p>We see that the values of <span class="math inline">\(B\)</span> are almost negligible after a certain maturity <span class="math inline">\(t\)</span> and thus <span class="math inline">\(P(t)\)</span> converges to <span class="math inline">\(A\)</span>. The interest rates converge therefore to the planned ultimate forward rate of <span class="math inline">\(4.2%\)</span> annually compounded.</p>
-<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/Pt-1.png" width="960" /></p>
+<p><img src="gli.lu/gli.lupost/2017-12-17-smith-wilson-model_files/figure-html/Pt-1.png" width="960" /></p>
 <p>Now let’s wrap this neatly into a function and plot the impact of different alphas.</p>
-<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/function-1.png" width="960" /></p>
+<p><img src="gli.lu/gli.lupost/2017-12-17-smith-wilson-model_files/figure-html/function-1.png" width="960" /></p>
 <p>Just as expected, <span class="math inline">\(\alpha\)</span> changes the speed at which the rates converge to the annually compounded ultimate forward rate.</p>
 </div>
 <div id="the-ultimate-forward-rate" class="section level2">
@@ -402,7 +402,7 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
 ## 9        10  0.00305     1
 ## 10       15  0.00688     1
 ## 11       20  0.00854     1</code></pre>
-<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/Bund-1.png" width="960" /></p>
+<p><img src="gli.lu/gli.lupost/2017-12-17-smith-wilson-model_files/figure-html/Bund-1.png" width="960" /></p>
 <p>We can see that the curve is relatively similar up to the last liquid point of 20 years and has a little bump, just like the EIOPA term structure, when the ufr is significantly higher than the highest known spot rate (5% compared to 0.852% in this case).</p>
 <p>Thanks for reading!</p>
 <p><strong>END</strong></p>
@@ -421,9 +421,9 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="/tags/interest-rate/">Interest rate</a>
+  <a class="tag tag--primary tag--small" href="gli.lu/tags/interest-rate/">Interest rate</a>
 
-  <a class="tag tag--primary tag--small" href="/tags/solvency-2/">Solvency 2</a>
+  <a class="tag tag--primary tag--small" href="gli.lu/tags/solvency-2/">Solvency 2</a>
 
                   </div>
                 
@@ -444,7 +444,7 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/first/" data-tooltip="Hello World">
+                <a class="post-action-btn btn btn--default tooltip--top" href="gli.lu/2017/11/first/" data-tooltip="Hello World">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -462,19 +462,19 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2017/12/smith-wilson-yield-curves/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=gli.lu/2017/12/smith-wilson-yield-curves/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2017/12/smith-wilson-yield-curves/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=gli.lu/2017/12/smith-wilson-yield-curves/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2017/12/smith-wilson-yield-curves/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=gli.lu/2017/12/smith-wilson-yield-curves/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -530,7 +530,7 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/first/" data-tooltip="Hello World">
+                <a class="post-action-btn btn btn--default tooltip--top" href="gli.lu/2017/11/first/" data-tooltip="Hello World">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -548,19 +548,19 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2017/12/smith-wilson-yield-curves/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=gli.lu/2017/12/smith-wilson-yield-curves/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2017/12/smith-wilson-yield-curves/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=gli.lu/2017/12/smith-wilson-yield-curves/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2017/12/smith-wilson-yield-curves/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=gli.lu/2017/12/smith-wilson-yield-curves/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -590,19 +590,19 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2017%2F12%2Fsmith-wilson-yield-curves%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=gli.lu%2F2017%2F12%2Fsmith-wilson-yield-curves%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2017%2F12%2Fsmith-wilson-yield-curves%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=gli.lu%2F2017%2F12%2Fsmith-wilson-yield-curves%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2017%2F12%2Fsmith-wilson-yield-curves%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=gli.lu%2F2017%2F12%2Fsmith-wilson-yield-curves%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -663,7 +663,7 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2017/12/smith-wilson-yield-curves/">
+              <a class="link-unstyled" href="gli.lu/2017/12/smith-wilson-yield-curves/">
                 <h3 class="media-heading">Smith-Wilson yield curves</h3>
               </a>
               <span class="media-meta">
@@ -681,7 +681,7 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2017/11/first/">
+              <a class="link-unstyled" href="gli.lu/2017/11/first/">
                 <h3 class="media-heading">Hello World</h3>
               </a>
               <span class="media-meta">
@@ -713,7 +713,7 @@ Credits : Icon made by Vectors Market.
     
   
     
-    <div id="cover" style="background-image:url('images/cover-v1.2.0.jpg');"></div>
+    <div id="cover" style="background-image:url('gli.lu/images/cover-v1.2.0.jpg');"></div>
   
 
 
@@ -725,7 +725,7 @@ Credits : Icon made by Vectors Market.
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="gli.lu/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
 
 
 
@@ -746,7 +746,7 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = '\/2017\/12\/smith-wilson-yield-curves\/';
+          this.page.url = 'gli.lu\/2017\/12\/smith-wilson-yield-curves\/';
           
             this.page.identifier = '\/2017\/12\/smith-wilson-yield-curves\/'
           
