@@ -225,8 +225,7 @@
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <p>Let’s start this journey with the most basic, yet most important “parameters” of any solvency 2 calculations : the risk-free interest rate. EIOPA, the european insurance and occupational pensions authority uses the Smith-Wilson model to publish the relevant risk free interest rate term structures, also called the RFR.</p>
-<!--more-->
-<p>According to article 77 of the <a href="http://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009L0138-20140523&amp;from=EN">Solvency 2 directive</a>, the best estimate of technical provisions shall correspond to the probability-weighted average of future cash-flows, taking account of the time value of money (expected present value of future cash-flows), using the relevant risk-free interest rate term structure. <span class="math display">\[Best\_Estimate=\mathbb{E}\left(\sum_{t≥0}Cashflow_t \cdot P(t)\right)\]</span> where <span class="math inline">\(P(t)\)</span> is the price of a zero-coupon bond of maturity <span class="math inline">\(t\)</span> priced with the relevant risk free interest rate term structures as set out by EIOPA.</p>
+<p>According to article 77 of the <a href="http://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009L0138-20140523&amp;from=EN">Solvency 2 directive</a>, the best estimate of technical provisions shall correspond to the probability-weighted average of future cash-flows, taking account of the time value of money (expected present value of future cash-flows), using the relevant risk-free interest rate term structure. <span class="math display">\[Best\_Estimate=\mathbb{E}\left[\sum_{t≥0}Cashflow_t \cdot P(t)\right]\]</span> where <span class="math inline">\(P(t)\)</span> is the price of a zero-coupon bond of maturity <span class="math inline">\(t\)</span> priced with the relevant risk free interest rate term structures as set out by EIOPA.</p>
 <div id="smith-wilson-model" class="section level1">
 <h1>Smith-Wilson model</h1>
 <p>This article is based on the work of the Financial Supervisory Authority of Norway, so feel free to check it out <a href="http://www.ressources-actuarielles.net/EXT/ISFA/fp-isfa.nsf/2b0481298458b3d1c1256f8a0024c478/bd689cce9bb2aeb5c1257998001ede2b/$FILE/A_Technical_Note_on_the_Smith-Wilson_Method_100701.pdf">here</a>.</p>
@@ -354,7 +353,7 @@ print(W)</code></pre>
 ## [2,] -33.507208
 ## [3,]  11.396473
 ## [4,]  -5.466968</code></pre>
-<p>Now that we have our zeta parameters we can build the whole curve, even for the maturities over <span class="math inline">\(J\)</span>. For this, we will need to extend <span class="math inline">\(W\)</span>, let’s say we want to get the curve up to 50 years (<span class="math inline">\(=K\)</span>).</p>
+<p>Now that we have our zeta parameters we can build the whole curve, even for the maturities over <span class="math inline">\(J\)</span>. For this, we will need to extend <span class="math inline">\(W\)</span>, say we want to get the curve up to 50 years (<span class="math inline">\(=K\)</span>).</p>
 <pre class="r"><code>K&lt;-50
 T.mat&lt;-t(matrix(1:J,J,K))
 U&lt;-(matrix(1:K,K,J))
@@ -373,13 +372,16 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
 <p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/zeta.extended-1.png" width="960" /></p>
 <p>We see that the values of <span class="math inline">\(B\)</span> are almost negligible after a certain maturity <span class="math inline">\(t\)</span> and thus <span class="math inline">\(P(t)\)</span> converges to <span class="math inline">\(A\)</span>. The interest rates converge therefore to the planned ultimate forward rate of <span class="math inline">\(4.2%\)</span> annually compounded.</p>
 <p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/Pt-1.png" width="960" /></p>
-<p>Now let’s wrap this neatly into a function and plot the impact of different alphas.</p>
-<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/function-1.png" width="960" /></p>
-<p>Just as expected, <span class="math inline">\(\alpha\)</span> changes the speed at which the rates converge to the annually compounded ultimate forward rate.</p>
 </div>
-<div id="the-ultimate-forward-rate" class="section level2">
-<h2>The ultimate forward rate</h2>
-<p>Let’s now assume that we have these risk-free bonds and plot the corresponding interest rates according to different ufr.</p>
+<div id="impact-of-alpha" class="section level2">
+<h2>Impact of alpha</h2>
+<p>Now let’s wrap this up neatly into a function and plot the impact of different alphas.</p>
+<p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/function-1.png" width="960" /></p>
+<p>Just as expected, <span class="math inline">\(\alpha\)</span> changes the speed at which the rates converge to the annually compounded ultimate forward rate. In our example, rates take more time to converge when <span class="math inline">\(\alpha&lt;0.10\)</span>.</p>
+</div>
+<div id="impact-of-the-ultimate-forward-rate" class="section level2">
+<h2>Impact of the ultimate forward rate</h2>
+<p>For this section, let’s assume that we have these dummy risk-free bonds and plot the corresponding interest rates according to different ufr.</p>
 <pre><code>##    Maturity   Coupon Price
 ## 1         2 -0.00696     1
 ## 2         3 -0.00571     1
@@ -393,10 +395,14 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
 ## 10       15  0.00688     1
 ## 11       20  0.00854     1</code></pre>
 <p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/Bund-1.png" width="960" /></p>
-<p>We can see that the curve is relatively similar up to the last liquid point of 20 years and has a little bump, just like the EIOPA term structure, when the ufr is significantly higher than the highest known spot rate (5% compared to 0.852% in this case).</p>
+<p>We can see that the curves are relatively similar up to the last liquid point of 20 years thanks to the effects of the kernel functions <span class="math inline">\(=B\)</span> and have a little bump when the ufr is significantly higher than the highest known spot rate (5% compared to 0.88% (zero coupon rates are not par yields)), just like the EIOPA term structure.</p>
 <p>Thanks for reading!</p>
 <p><strong>END</strong></p>
-<p>Credits : Icon made by <a href="https://www.flaticon.com/authors/dimitry-miroliubov">Dimitry Miroliubov</a>.</p>
+<p>Credits :</p>
+<ul>
+<li><a href="http://www.ressources-actuarielles.net/EXT/ISFA/fp-isfa.nsf/2b0481298458b3d1c1256f8a0024c478/bd689cce9bb2aeb5c1257998001ede2b/$FILE/A_Technical_Note_on_the_Smith-Wilson_Method_100701.pdf">A technical note on the Smith-Wilson method</a></li>
+<li>Icon made by <a href="https://www.flaticon.com/authors/dimitry-miroliubov">Dimitry Miroliubov</a>.</li>
+</ul>
 </div>
 </div>
 
@@ -662,7 +668,7 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather">Let’s start this journey with the most basic, yet most important “parameters” of any solvency 2 calculations : the risk-free interest rate. EIOPA, the european insurance and occupational pensions authority uses the Smith-Wilson model to publish the relevant risk free interest rate term structures, also called the RFR.
- According to article 77 of the Solvency 2 directive, the best estimate of technical provisions shall correspond to the probability-weighted average of future cash-flows, taking account of the time value of money (expected present value of future cash-flows), using the relevant risk-free interest rate term structure.</div>
+According to article 77 of the Solvency 2 directive, the best estimate of technical provisions shall correspond to the probability-weighted average of future cash-flows, taking account of the time value of money (expected present value of future cash-flows), using the relevant risk-free interest rate term structure.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -703,7 +709,7 @@ Credits : Icon made by Vectors Market.
     
   
     
-    <div id="cover" style="background-image:url('/images/cover-v1.2.0.jpg');"></div>
+    <div id="cover" style="background-image:url('https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-393451.jpg');"></div>
   
 
 
