@@ -33,9 +33,9 @@
     <meta property="og:type" content="blog">
     <meta property="og:title" content="Smith-Wilson yield curves">
     <meta property="og:url" content="/2017/12/smith-wilson-yield-curves/">
-    <meta property="og:site_name" content="Guanhua&#39;s blog">
+    <meta property="og:site_name" content="Guanhua Li">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Guanhua&#39;s blog">
+    <meta name="twitter:title" content="Guanhua Li">
     <meta name="twitter:description" content="Let&#39;s start this journey with the most basic, yet most important parameters of any solvency 2 calculations : the risk-free interest rate.">
     
       <meta name="twitter:creator" content="@lihtium">
@@ -78,7 +78,7 @@
       <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="/">Guanhua&#39;s blog</a>
+    <a class="header-title-link" href="/">Guanhua Li</a>
   </div>
   
     
@@ -114,7 +114,7 @@
     
       <a class="sidebar-button-link " href="/">
     
-      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      <i class="sidebar-button-icon fa fa-lg fa-desktop"></i>
       
       <span class="sidebar-button-desc">Home</span>
     </a>
@@ -122,11 +122,11 @@
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/categories">
+      <a class="sidebar-button-link " href="/categories/actuarial">
     
-      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      <i class="sidebar-button-icon fa fa-lg fa-bar-chart"></i>
       
-      <span class="sidebar-button-desc">Categories</span>
+      <span class="sidebar-button-desc">Actuarial Science</span>
     </a>
   </li>
 
@@ -218,6 +218,14 @@
       </time>
     
     
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/actuarial">actuarial</a>
+    
+  
+
   </div>
 
 </div>
@@ -268,17 +276,19 @@ m_i &amp;= \sum_{j=1}^Jc_{i,j}\cdot P(u_j) \\
 \begin{aligned}
   m &amp;= C\cdot p  \\
     &amp;= C\cdot \mu+(CWC^T)\zeta \\
-    &amp;= M(N\times N) \cdot M(N \times 1) + \left[M(N\times J)\cdot M(J \times J)\cdot M(J \times N)\right]\cdot M(N\times 1)\\
+    &amp;= M(N\times N) \cdot M(N \times 1)\\
+    &amp;+ \left[M(N\times J)\cdot M(J \times J)\cdot M(J \times N)\right]\cdot M(N\times 1)\\
     &amp;= M(N\times 1)
 \end{aligned}
 \]</span> with <span class="math inline">\(\mu=(e^{-ufr\cdot u_1},e^{-ufr\cdot u_2},e^{-ufr\cdot u_3},...,e^{-ufr\cdot u_J})^T\)</span>. We can also check that this system makes sense by checking the dimensions of the matrices</p>
 <p><span class="math display">\[
 \begin{aligned}
   C\cdot p &amp;= C\cdot \mu+(CWC^T)\zeta \\
-  M(N\times N) \cdot M(N \times 1) &amp;= M(N\times N) \cdot M(N \times 1) + \left[M(N\times J)\cdot M(J \times J)\cdot M(J \times N)\right]\cdot M(N\times 1)\\
+  M(N\times N) \cdot M(N \times 1) &amp;= M(N\times N) \cdot M(N \times 1) \\ 
+  &amp;+\left[M(N\times J)\cdot M(J \times J)\cdot M(J \times N)\right]\cdot M(N\times 1)\\
   M(N\times 1) &amp;= M(N\times 1)
 \end{aligned}
-\]</span> We can now figure out how to compute <span class="math inline">\(\zeta = (CWC^T)^{-1}(m-C\cdot \mu)\)</span>.</p>
+\]</span> We therefore have all the ingredients to calculate <span class="math inline">\(\zeta = (CWC^T)^{-1}(m-C\cdot \mu)\)</span>.</p>
 <div id="example" class="section level2">
 <h2>Example</h2>
 <p>Let’s consider 4(=N) at par bonds with maturities 1,2,3,5 and coupons :</p>
@@ -380,7 +390,7 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
 <p>Just as stated above, as the effect of <span class="math inline">\(W(t,u_j)\)</span> decreases, the importance of the kernel functions <span class="math inline">\(K_i(t) = \sum_{j=1}^J c_{i,j}\cdot W(t,u_j)\)</span> also decreases.</p>
 <p>Let’s split the function <span class="math display">\[P(t)=\underbrace{e^{-ufr \cdot t}}_{A}+\underbrace{\sum_{i=1}^N \zeta_i \cdot \left( \sum_{j=1}^J c_{i,j}\cdot W(t,u_j)\right)}_{B}\]</span> into two parts and plot their values on a graph.</p>
 <div id="htmlwidget-1" style="width:672px;height:240px;" class="dygraphs html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1">{"x":{"attrs":{"labels":["t","B","A"],"legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60,"drawAxis":true},"y":{"drawAxis":true}},"series":{"B":{"axis":"y"},"A":{"axis":"y"}},"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":false,"pointSize":1,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colorValue":0.5,"colorSaturation":1,"includeZero":false,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":0.3,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"showRangeSelector":true,"rangeSelectorHeight":20,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel"},"annotations":[],"shadings":[],"events":[],"format":"numeric","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],[0.030406111628439,0.0399679917914859,0.0413291639133295,0.036743868149087,0.029369592623132,0.0225258542260014,0.0167030067539075,0.0117618285341029,0.00758161918951272,0.00405775374759743,0.0010995590283307,-0.00137153012433511,-0.00342357161666951,-0.00511550588312537,-0.00649836245357283,-0.0076163074374429,-0.00850755287586136,-0.00920514615465118,-0.00973765527581649,-0.0101297637052734,-0.0104027867084586,-0.0105751195171681,-0.0106626263090479,-0.0106789777986085,-0.0106359442117135,-0.0105436495237473,-0.0104107920674108,-0.0102448359436056,-0.0100521770850824,-0.00983828731551173,-0.00960783930633602,-0.00936481495153918,-0.00911259934847508,-0.00885406228464147,-0.00859162888000886,-0.00832734081715825,-0.00806290940274645,-0.00779976153996942,-0.00753907954936983,-0.00728183565180035,-0.00702882182004827,-0.00678067561248547,-0.00653790252121084,-0.00630089529692018,-0.00606995065174482,-0.0058452836883825,-0.00562704035781242,-0.00541530820802899,-0.00521012565153062,-0.0050114899492128],[0.959692898272553,0.921010458994772,0.883887196732027,0.848260265577761,0.814069352761767,0.781256576546801,0.749766388240692,0.719545478158054,0.690542685372412,0.662708911105962,0.635997035610328,0.610361838397628,0.585759921686783,0.562149636935492,0.539491014333486,0.517745695137702,0.496876866734839,0.476849200321343,0.457628791095338,0.43918310085925,0.42148090293594,0.404492229305125,0.388188319870562,0.372541573772132,0.357525502660395,0.343114685854506,0.329284727307587,0.316012214306706,0.303274677837529,0.291050554546573,0.279319150236635,0.268060604833623,0.257255858765473,0.246886620696231,0.236935336560682,0.227385159847104,0.218219923077835,0.209424110439381,0.200982831515721,0.192881796080346,0.185107289904363,0.177646151539696,0.170485750038096,0.16361396356823,0.157019158894654,0.150690171683929,0.144616287604539,0.138787224188617,0.133193113424776,0.127824485052568]],"fixedtz":false,"tzone":""},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"attrs":{"labels":["t","B","A"],"legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60,"drawAxis":true},"y":{"drawAxis":true}},"series":{"B":{"axis":"y"},"A":{"axis":"y"}},"showRangeSelector":true,"rangeSelectorHeight":20,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel","stackedGraph":false,"fillGraph":true,"fillAlpha":0.4,"stepPlot":false,"drawPoints":false,"pointSize":1,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colorValue":0.5,"colorSaturation":1,"includeZero":false,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":0.3,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true},"annotations":[],"shadings":[],"events":[],"format":"numeric","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],[0.030406111628439,0.0399679917914859,0.0413291639133295,0.036743868149087,0.029369592623132,0.0225258542260014,0.0167030067539075,0.0117618285341029,0.00758161918951272,0.00405775374759743,0.0010995590283307,-0.00137153012433511,-0.00342357161666951,-0.00511550588312537,-0.00649836245357283,-0.0076163074374429,-0.00850755287586136,-0.00920514615465118,-0.00973765527581649,-0.0101297637052734,-0.0104027867084586,-0.0105751195171681,-0.0106626263090479,-0.0106789777986085,-0.0106359442117135,-0.0105436495237473,-0.0104107920674108,-0.0102448359436056,-0.0100521770850824,-0.00983828731551173,-0.00960783930633602,-0.00936481495153918,-0.00911259934847508,-0.00885406228464147,-0.00859162888000886,-0.00832734081715825,-0.00806290940274645,-0.00779976153996942,-0.00753907954936983,-0.00728183565180035,-0.00702882182004827,-0.00678067561248547,-0.00653790252121084,-0.00630089529692018,-0.00606995065174482,-0.0058452836883825,-0.00562704035781242,-0.00541530820802899,-0.00521012565153062,-0.0050114899492128],[0.959692898272553,0.921010458994772,0.883887196732027,0.848260265577761,0.814069352761767,0.781256576546801,0.749766388240692,0.719545478158054,0.690542685372412,0.662708911105962,0.635997035610328,0.610361838397628,0.585759921686783,0.562149636935492,0.539491014333486,0.517745695137702,0.496876866734839,0.476849200321343,0.457628791095338,0.43918310085925,0.42148090293594,0.404492229305125,0.388188319870562,0.372541573772132,0.357525502660395,0.343114685854506,0.329284727307587,0.316012214306706,0.303274677837529,0.291050554546573,0.279319150236635,0.268060604833623,0.257255858765473,0.246886620696231,0.236935336560682,0.227385159847104,0.218219923077835,0.209424110439381,0.200982831515721,0.192881796080346,0.185107289904363,0.177646151539696,0.170485750038096,0.16361396356823,0.157019158894654,0.150690171683929,0.144616287604539,0.138787224188617,0.133193113424776,0.127824485052568]],"fixedtz":false,"tzone":""},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
 <p>We see that the values of <span class="math inline">\(B\)</span> are almost negligible after a certain maturity <span class="math inline">\(t\)</span> and thus <span class="math inline">\(P(t)\)</span> converges to <span class="math inline">\(A\)</span>. The interest rates converge therefore to the planned ultimate forward rate of <span class="math inline">\(4.2%\)</span> annually compounded.</p>
 <p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/Pt-1.png" width="960" /></p>
 </div>
@@ -406,7 +416,7 @@ W&lt;-exp(-ufr*(T.mat+U))*(a*min_tuj-0.5*exp(-a*max_tuj)*(exp(a*min_tuj)-exp(-a*
 ## 10       15  0.00688     1
 ## 11       20  0.00854     1</code></pre>
 <p><img src="/post/2017-12-17-smith-wilson-model_files/figure-html/Bund-1.png" width="960" /></p>
-<p>We can see that the curves are relatively similar up to the last liquid point of 20 years thanks to the effects of the kernel functions <span class="math inline">\(=B\)</span> and have a little bump when the ufr is significantly higher than the highest known spot rate (5% compared to 0.88% (zero coupon rates are not par yields)), just like the EIOPA term structure.</p>
+<p>We can see that the curves are relatively similar up to the last liquid point of 20 years thanks to the effects of the kernel functions <span class="math inline">\(=B\)</span> and have a little bump when the ufr is significantly higher than the zero coupon rate of the highest maturity (e.g. 5% compared to 0.88%).</p>
 <p>Thanks for reading!</p>
 <p><strong>END</strong></p>
 <p>Credits :</p>
