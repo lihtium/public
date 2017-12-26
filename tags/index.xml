@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Guanhua Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Insurance</title>
+      <link>/tags/insurance/</link>
+      <pubDate>Mon, 25 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/insurance/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Interest Rate</title>
@@ -17,6 +26,33 @@
       <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/interest-rate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Life</title>
+      <link>/tags/life/</link>
+      <pubDate>Mon, 25 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/life/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lifecontingencies</title>
+      <link>/tags/lifecontingencies/</link>
+      <pubDate>Mon, 25 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/lifecontingencies/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Luxembourg</title>
+      <link>/tags/luxembourg/</link>
+      <pubDate>Mon, 25 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/luxembourg/</guid>
       <description></description>
     </item>
     

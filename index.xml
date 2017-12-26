@@ -6,10 +6,21 @@
     <description>Recent content on Guanhua Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Quantify life ?</title>
+      <link>/2017/12/quantify-life/</link>
+      <pubDate>Mon, 25 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/quantify-life/</guid>
+      <description>Life insurance Classical life insurance is all about interest rate and mortality. Let’s take for example a whole life insurance contract which is basically a contract with a payment at the end of the year of death of the insured to the beneficiary, a good classical life insurance contract.
+In order to model this, life actuaries need to
+ model the future lifetime model the interest rates in order to discount this payment  Life actuaries use fancy notations to express their “things”, so in order to understand what’s going on let me list here some simple notations :</description>
+    </item>
     
     <item>
       <title>Smith-Wilson yield curves</title>
