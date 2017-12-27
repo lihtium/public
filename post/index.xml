@@ -18,7 +18,7 @@
       
       <guid>/2017/12/quantify-life/</guid>
       <description>Life insurance Classical life insurance is all about interest rate and mortality. Let’s take for example a whole life insurance contract which is basically a contract with a payment at the end of the year of death of the insured to the beneficiary, a good classical life insurance contract.
-In order to model this, life actuaries need to
+In order to model this, we need to
  model the future lifetime model the interest rates in order to discount this payment  Life actuaries use fancy notations to express their “things”, so in order to understand what’s going on let me list here some simple notations :</description>
     </item>
     
