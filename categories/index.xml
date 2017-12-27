@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Guanhua Li</title>
-    <link>/categories/</link>
+    <link>http://gli.lu/categories/</link>
     <description>Recent content in Categories on Guanhua Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 25 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://gli.lu/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Actuarial</title>
-      <link>/categories/actuarial/</link>
+      <link>http://gli.lu/categories/actuarial/</link>
       <pubDate>Mon, 25 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/categories/actuarial/</guid>
+      <guid>http://gli.lu/categories/actuarial/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Na</title>
-      <link>/categories/na/</link>
+      <link>http://gli.lu/categories/na/</link>
       <pubDate>Sat, 11 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>/categories/na/</guid>
+      <guid>http://gli.lu/categories/na/</guid>
       <description></description>
     </item>
     
