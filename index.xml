@@ -2,21 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Guanhua Li</title>
-    <link>http://gli.lu/</link>
+    <link>/</link>
     <description>Recent content on Guanhua Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://gli.lu/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Monte Carlo Casino</title>
+      <link>/2018/01/monte-carlo-casino/</link>
+      <pubDate>Sun, 07 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/monte-carlo-casino/</guid>
+      <description>Several days ago, I was playing a chinese card game 鋤大D with a bunch of friends and I was wondering what were the different odds of obtaining certain sets of cards. So instead of calculating these probabilities, why not just estimate them ?
+The rules of the game Let me explain here briefly how this game works. We start with a shuffled deck of 52 cards and distribute them to 4 players, one by one, eventually everyone will have 13 cards.</description>
+    </item>
+    
+    <item>
       <title>Quantify life ?</title>
-      <link>http://gli.lu/2017/12/quantify-life/</link>
+      <link>/2017/12/quantify-life/</link>
       <pubDate>Mon, 25 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://gli.lu/2017/12/quantify-life/</guid>
+      <guid>/2017/12/quantify-life/</guid>
       <description>Life insurance Classical life insurance is all about interest rate and mortality. Let’s take for example a whole life insurance contract which is basically a contract with a payment at the end of the year of death of the insured to the beneficiary, a good classical life insurance contract.
 In order to model this, we need to
  model the future lifetime model the interest rates in order to discount this payment  Life actuaries use fancy notations to express their “things”, so in order to understand what’s going on let me list here some simple notations :</description>
@@ -24,30 +34,30 @@ In order to model this, we need to
     
     <item>
       <title>Smith-Wilson yield curves</title>
-      <link>http://gli.lu/2017/12/smith-wilson-yield-curves/</link>
+      <link>/2017/12/smith-wilson-yield-curves/</link>
       <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://gli.lu/2017/12/smith-wilson-yield-curves/</guid>
+      <guid>/2017/12/smith-wilson-yield-curves/</guid>
       <description>Let’s start this journey with the most basic, yet most important “parameters” of any solvency 2 calculations : the risk-free interest rate. EIOPA, the european insurance and occupational pensions authority uses the Smith-Wilson model to publish the relevant risk free interest rate term structures, also called the RFR.
 According to article 77 of the Solvency 2 directive, the best estimate of technical provisions shall correspond to the probability-weighted average of future cash-flows, taking account of the time value of money (expected present value of future cash-flows), using the relevant risk-free interest rate term structure.</description>
     </item>
     
     <item>
       <title>About me</title>
-      <link>http://gli.lu/me/about-me/</link>
+      <link>/me/about-me/</link>
       <pubDate>Sat, 11 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://gli.lu/me/about-me/</guid>
+      <guid>/me/about-me/</guid>
       <description>Education and Work experience I grew up in Luxembourg, a small western european country and studied in Strasbourg (UdS) and eventually graduated in 2012. Now I live in Luxembourg and work as an actuary for a local insurance company. I had the opportunity to work on several non-life and life insurance topic before going over to asset and liability management.
 In order to work effectively with the finance department, I also attented a course in stochastic finance at UCL in Belgium.</description>
     </item>
     
     <item>
       <title>Hello World</title>
-      <link>http://gli.lu/2017/11/first/</link>
+      <link>/2017/11/first/</link>
       <pubDate>Sat, 11 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://gli.lu/2017/11/first/</guid>
+      <guid>/2017/11/first/</guid>
       <description>First post This post exists only for testing purposes.
 print(&amp;quot;Hello World.&amp;quot;) ## [1] &amp;quot;Hello World.&amp;quot; Guanhua.
 Credits : Icon made by Vectors Market.

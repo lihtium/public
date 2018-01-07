@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Probabilities on Guanhua Li</title>
+    <link>/tags/probabilities/</link>
+    <description>Recent content in Probabilities on Guanhua Li</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 07 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/probabilities/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Monte Carlo Casino</title>
+      <link>/2018/01/monte-carlo-casino/</link>
+      <pubDate>Sun, 07 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/monte-carlo-casino/</guid>
+      <description>Several days ago, I was playing a chinese card game 鋤大D with a bunch of friends and I was wondering what were the different odds of obtaining certain sets of cards. So instead of calculating these probabilities, why not just estimate them ?
+The rules of the game Let me explain here briefly how this game works. We start with a shuffled deck of 52 cards and distribute them to 4 players, one by one, eventually everyone will have 13 cards.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -3,116 +3,133 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://gli.lu/2017/12/quantify-life/</loc>
+    <loc>/2018/01/monte-carlo-casino/</loc>
+    <lastmod>2018-01-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/12/quantify-life/</loc>
     <lastmod>2017-12-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://gli.lu/2017/12/smith-wilson-yield-curves/</loc>
+    <loc>/2017/12/smith-wilson-yield-curves/</loc>
     <lastmod>2017-12-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://gli.lu/me/about-me/</loc>
+    <loc>/me/about-me/</loc>
     <lastmod>2017-11-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://gli.lu/2017/11/first/</loc>
+    <loc>/2017/11/first/</loc>
     <lastmod>2017-11-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://gli.lu/categories/actuarial/</loc>
+    <loc>/categories/actuarial/</loc>
+    <lastmod>2018-01-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/archives/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2018-01-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2018-01-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/insurance/</loc>
     <lastmod>2017-12-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://gli.lu/archives/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gli.lu/categories/</loc>
-    <lastmod>2017-12-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gli.lu/</loc>
-    <lastmod>2017-12-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gli.lu/tags/insurance/</loc>
-    <lastmod>2017-12-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gli.lu/tags/interest-rate/</loc>
-    <lastmod>2017-12-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gli.lu/tags/life/</loc>
-    <lastmod>2017-12-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gli.lu/tags/lifecontingencies/</loc>
-    <lastmod>2017-12-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gli.lu/tags/luxembourg/</loc>
-    <lastmod>2017-12-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gli.lu/tags/me/</loc>
-    <lastmod>2017-11-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gli.lu/me/</loc>
-    <lastmod>2017-11-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gli.lu/categories/na/</loc>
-    <lastmod>2017-11-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gli.lu/tags/na/</loc>
-    <lastmod>2017-11-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gli.lu/post/</loc>
-    <lastmod>2017-12-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://gli.lu/tags/solvency-2/</loc>
+    <loc>/tags/interest-rate/</loc>
     <lastmod>2017-12-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://gli.lu/tags/</loc>
+    <loc>/tags/life/</loc>
+    <lastmod>2017-12-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/lifecontingencies/</loc>
+    <lastmod>2017-12-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/luxembourg/</loc>
+    <lastmod>2017-12-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/me/</loc>
+    <lastmod>2017-11-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/me/</loc>
+    <lastmod>2017-11-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/monte-carlo/</loc>
+    <lastmod>2018-01-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/na/</loc>
+    <lastmod>2017-11-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/na/</loc>
+    <lastmod>2017-11-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2018-01-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/probabilities/</loc>
+    <lastmod>2018-01-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/solvency-2/</loc>
+    <lastmod>2017-12-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
     <lastmod>2017-12-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

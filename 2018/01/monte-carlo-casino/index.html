@@ -1,0 +1,2736 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.30.2 with theme Tranquilpeak 0.4.2-BETA">
+    <title>Monte Carlo Casino</title>
+    <meta name="author" content="Guanhua Li">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+    <meta name="description" content="Several days ago, I was playing a chinese card game with a bunch of friends and I was wondering what were the different odds of obtaining certain sets of cards. So instead of calculating these probabilities, why not just estimate them ?">
+    <meta property="og:description" content="Several days ago, I was playing a chinese card game with a bunch of friends and I was wondering what were the different odds of obtaining certain sets of cards. So instead of calculating these probabilities, why not just estimate them ?">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Monte Carlo Casino">
+    <meta property="og:url" content="/2018/01/monte-carlo-casino/">
+    <meta property="og:site_name" content="Guanhua Li">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Guanhua Li">
+    <meta name="twitter:description" content="Several days ago, I was playing a chinese card game with a bunch of friends and I was wondering what were the different odds of obtaining certain sets of cards. So instead of calculating these probabilities, why not just estimate them ?">
+    
+      <meta name="twitter:creator" content="@lihtium">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://image.flaticon.com/icons/svg/315/315061.svg">
+    
+
+    
+      <meta property="og:image" content="https://image.flaticon.com/icons/svg/469/469633.svg">
+    
+    
+      <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/People_playing_card_games_in_the_street.jpg/1920px-People_playing_card_games_in_the_street.jpg">
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Guanhua Li</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://image.flaticon.com/icons/svg/315/315061.svg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://image.flaticon.com/icons/svg/315/315061.svg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Guanhua Li</h4>
+        
+          <h5 class="sidebar-profile-bio">Been there, done that &hellip;</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-desktop"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories/actuarial">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bar-chart"></i>
+      
+      <span class="sidebar-button-desc">Actuarial science</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/guanhuali">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              "
+       style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/People_playing_card_games_in_the_street.jpg/1920px-People_playing_card_games_in_the_street.jpg')"
+       data-behavior="4">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Monte Carlo Casino
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-01-07T00:00:00Z">
+        
+  January 7, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/actuarial">actuarial</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="4"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>Several days ago, I was playing a chinese card game <a href="https://en.wikipedia.org/wiki/Big_two">鋤大D</a> with a bunch of friends and I was wondering what were the different odds of obtaining certain sets of cards. So instead of calculating these probabilities, why not just estimate them ?</p>
+<div id="the-rules-of-the-game" class="section level1">
+<h1>The rules of the game</h1>
+<p>Let me explain here briefly how this game works. We start with a <em>shuffled</em> deck of 52 cards and distribute them to 4 players, one by one, eventually everyone will have 13 cards. Obviously we have our own terms in chinese but it will be easier to use the poker terms here. The players then arrange the cards to pairs, straights, flushes, full houses etc. The one with the 3♦ can start the game and must play something that includes this 3♦ according to the rules. Cards may only be played as singles or in groups of two, three or five, in combinations which resemble poker hands. The next player (clockwise or counter-clockwise) then plays something with the same number of cards that has a higher rank than what the previous player played. If nobody has or wants to play a set of cards with a higher rank, then the player can play what he wants.</p>
+<p>The card with the highest rank is the 2 followed by A and so forth, with their respective suit so in increasing order it looks like this</p>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:150px; ">
+<table class="table table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Card
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">3♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">3♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">3♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">3♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">4♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">4♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">4♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">4♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">5♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">5♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">5♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">5♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">6♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">6♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">6♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">6♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">7♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">7♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">7♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">7♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">8♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">8♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">8♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">8♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">9♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">9♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">9♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">9♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">10♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">10♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">10♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">10♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">J♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">J♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">J♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">J♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">Q♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">Q♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">Q♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">Q♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">K♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">K♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">K♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">K♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">A♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">A♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">A♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">A♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">2♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">2♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">2♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">2♠</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="combinations-of-cards" class="section level2">
+<h2>Combinations of cards</h2>
+<p>So, recall that everyone has 13 cards. In fact, there are a total of 635 013 559 600 possible hands (in comparison Poker with a hand of 5 cards has 2 598 960 possible hands).</p>
+<p>The combinations in this game is pretty straight forward if you have played some Poker :</p>
+<ul>
+<li>Combination of 2 cards : pairs</li>
+<li>Combination of 3 cards : three of a kind</li>
+<li><p>Combinations of 5 cards : (in increasing rank, a Flush beats a Straight etc.)</p></li>
+<li>Straight (sequential of 5 cards)</li>
+<li>Flush (5 cards of the same suit)</li>
+<li>Full house (3 same and a pair)</li>
+<li>Four of a kind (4 same and a card)</li>
+<li><p>Straight flush (sequential and same suit)</p></li>
+</ul>
+</div>
+</div>
+<div id="building-the-framework" class="section level1">
+<h1>Building the framework</h1>
+<p>As I don’t know any package that could help me define the rules of this game, I’ll just build up the whole framework from scratch. First thing we need is to shuffle the cards and shuffling the cards is the same as randomly reassinging the order of appearence of the cards (i.e. 1 to 52).</p>
+<pre class="r"><code>set.seed(1)
+shuffle&lt;-sample(1:52,52,replace=F)
+print(shuffle)</code></pre>
+<pre><code>##  [1] 14 19 29 45 10 43 44 30 28  3  9  8 46 15 49 51 26 35 13 36 38  7 20
+## [24]  4 41 11  1 48 21 40 27 34 25 50 39 12 24  2 22  6 32 23 52  5 42 16
+## [47] 33 47 17 37 31 18</code></pre>
+<p>Applied to our deck yields</p>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:150px; ">
+<table class="kable_wrapper table table-hover" style="margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">
+id
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+22
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+23
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+27
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+29
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+30
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+31
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+34
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+35
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+37
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+38
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+39
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+41
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+42
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+43
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+44
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+45
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+46
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+47
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+48
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+49
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+50
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+51
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+52
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">
+Unshuffled deck
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">A♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">A♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">A♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">A♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">2♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">2♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">2♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">2♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">3♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">3♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">3♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">3♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">4♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">4♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">4♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">4♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">5♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">5♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">5♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">5♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">6♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">6♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">6♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">6♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">7♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">7♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">7♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">7♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">8♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">8♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">8♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">8♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">9♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">9♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">9♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">9♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">10♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">10♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">10♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">10♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">J♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">J♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">J♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">J♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">Q♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">Q♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">Q♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">Q♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">K♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">K♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">K♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">K♠</span>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">
+Shuffled deck
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">4♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">5♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">8♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">Q♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">3♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">J♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">J♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">8♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">7♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">A♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">3♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">2♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">Q♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">4♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">K♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">K♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">7♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">9♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">4♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">9♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">10♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">2♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">5♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">A♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">J♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">3♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">A♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">Q♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">6♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">10♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">7♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">9♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">7♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">K♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">10♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">3♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">6♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">A♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">6♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">2♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">8♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">6♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">K♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">2♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">J♣</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">4♠</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">9♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">Q♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">5♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">10♦</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: red;">8♥</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span style="color: black;">5♣</span>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>So the first card is 4♣, the second card is 5♥ and so on. <a href="https://en.wikipedia.org/wiki/Glossary_of_poker_terms">Dealing</a> the cards is the same as saying that the first player gets every forth card and so on.</p>
+<p>Here around that little table, 4 friends, Alibaba, Baidu, Chinamobile and Didi are playing this game. So according to our shuffled deck, Alibaba will get 4♣,3♣,7♠ …</p>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Alibaba</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span style="color: black;">4♣</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">3♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">7♠</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">Q♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">7♣</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">10♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">J♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">6♦</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">7♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">6♠</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">8♠</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">J♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">5♦</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Baidu</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span style="color: red;">5♥</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">J♥</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">A♥</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">4♥</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">9♥</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">2♥</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">3♥</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">10♠</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">K♣</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">A♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">6♥</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">4♠</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">10♦</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Chinamobile</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span style="color: red;">8♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">J♠</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">3♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">K♦</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">4♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">5♠</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">A♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">7♥</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">10♥</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">6♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">K♠</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">9♦</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">8♥</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Didi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span style="color: red;">Q♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">8♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">2♠</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">K♥</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">9♠</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">A♠</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">Q♠</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">9♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">3♠</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">2♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">2♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">Q♥</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">5♣</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p>As there are 13 cards, the player often needs a few minutes to order his hand and figure out a strategy. So after a minute, the players realise they have</p>
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Alibaba</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span style="color: black;">3♣</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">4♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">5♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">6♦</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">6♠</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">7♠</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">7♣</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">7♦</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">8♠</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">10♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">J♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">J♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">Q♣</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Baidu</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span style="color: red;">A♥</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">A♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">2♥</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">3♥</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">4♥</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">4♠</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">5♥</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">6♥</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">9♥</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">10♠</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">10♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">J♥</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">K♣</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Chinamobile</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span style="color: red;">A♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">3♦</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">4♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">5♠</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">6♣</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">7♥</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">8♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">8♥</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">9♦</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">10♥</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">J♠</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">K♦</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">K♠</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Didi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span style="color: black;">A♠</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">2♠</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">2♣</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">2♦</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">3♠</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">5♣</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">8♣</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: black;">9♠</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">9♣</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">Q♦</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: black;">Q♠</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span style="color: red;">Q♥</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span style="color: red;">K♥</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p>We have here 4 hands of 13 cards, Alibaba got a three of a kind, Didi was even luckier and got even 2 three of a kinds.</p>
+<p>In fact the players got</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Player</th>
+<th align="right">Singles</th>
+<th align="right">Pair</th>
+<th align="right">Three_of_a_kind</th>
+<th align="right">Four_of_a_kind</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Alibaba</td>
+<td align="right">6</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Baidu</td>
+<td align="right">7</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Chinamobile</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Didi</td>
+<td align="right">5</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p>So we can clearly see that according to the first shuffle, we got 8 pairs, 3 three of a kind, 2 full houses and 0 four of a kind.</p>
+<p>Let’s make them play a 1000 times.</p>
+<p>I’d recommend to set the shuffle orders once and reuse them later. It takes up some space but very often it turns out to be very useful.</p>
+<pre class="r"><code>Simulations&lt;-1000
+#library(foreach)
+#library(doParallel)
+cl&lt;-makeCluster(4)
+registerDoParallel(cl)
+
+shuffles&lt;-foreach(game=1:Simulations)%dopar%{sample(1:52,52,replace=F)}</code></pre>
+<p>What we really want is the aggregated information of a game, e.g. the number of pairs, three of a kinds etc. So I designed a function that will give me the information I need according to a certain shuffled order.</p>
+<pre class="r"><code>one.game&lt;-function(deck,shuffle,i){
+  shuffle %&gt;% deck[.,] %&gt;% mutate(Player=dist) %&gt;% group_by(Player,Rank) %&gt;% summarise(n=n()) %&gt;%
+    summarise(
+    Pair = sum(n==2),
+    Three_of_a_kind = sum(n==3),
+    Four_of_a_kind = sum(n==4),
+    Game = i
+    )
+}
+
+Games&lt;-foreach(game=1:Simulations,.combine=rbind.data.frame,.packages=&quot;tidyverse&quot;)%dopar%{
+  one.game(deck,shuffles[[game]],game)
+}
+stopCluster(cl)
+Games</code></pre>
+<pre><code>## # A tibble: 4,000 x 5
+##         Player  Pair Three_of_a_kind Four_of_a_kind  Game
+##         &lt;fctr&gt; &lt;int&gt;           &lt;int&gt;          &lt;int&gt; &lt;int&gt;
+##  1     Alibaba     1               1              0     1
+##  2       Baidu     4               0              0     1
+##  3 Chinamobile     1               2              0     1
+##  4        Didi     3               0              0     1
+##  5     Alibaba     3               0              0     2
+##  6       Baidu     4               0              0     2
+##  7 Chinamobile     0               1              0     2
+##  8        Didi     2               1              0     2
+##  9     Alibaba     2               1              0     3
+## 10       Baidu     4               1              0     3
+## # ... with 3,990 more rows</code></pre>
+<p>Our friends have been hard at work in playing all these 1000 games … for science!</p>
+<div id="from-simulations-to-probabilities" class="section level2">
+<h2>From simulations to probabilities</h2>
+<p>Recall that we wish to estimate the probabilities that a hand of 13 cards contains a certain subset of cards. We will start with the <strong>combinations</strong> with</p>
+<ul>
+<li>same rank, e.g. (AAA), (QQ), (KKKK)</li>
+<li>same suit, e.g. (♠♠♠♠♠), (♣♣♣♣♣)</li>
+<li>sequence, e.g. (9,10,J,Q,K)</li>
+</ul>
+<div id="same-rank" class="section level3">
+<h3>Same Rank</h3>
+<p>Let’s start with the most frequent ones, the pairs. So let PAIR be the random variable counting the numbers of pair in a hand. PAIR can take values in <span class="math inline">\([0,6]\)</span> because a hand has 13 cards. The indicator that interests us is : <span class="math display">\[\frac{\#PAIR=0}{4000}\approx\mathbb{P}[PAIR=0]\]</span></p>
+<p>and equivalently</p>
+<p><span class="math display">\[1-\frac{\#PAIR=0}{4000}\approx\mathbb{P}[PAIR&gt;0]\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Pair</th>
+<th align="center">Count</th>
+<th align="center">Odds</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">69</td>
+<td align="center">0.02</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">488</td>
+<td align="center">0.12</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">1074</td>
+<td align="center">0.27</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">1269</td>
+<td align="center">0.32</td>
+</tr>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">845</td>
+<td align="center">0.21</td>
+</tr>
+<tr class="even">
+<td align="center">5</td>
+<td align="center">246</td>
+<td align="center">0.06</td>
+</tr>
+<tr class="odd">
+<td align="center">6</td>
+<td align="center">9</td>
+<td align="center">0.00</td>
+</tr>
+</tbody>
+</table>
+<p>So according to our simulations, 69 games out of the <span class="math inline">\(4 \times 1000\)</span> didn’t have any pairs.</p>
+<p>These are simple counts, because the hidden pairs in the three/four of a kinds have not been counted. So if we want to count these hidden pairs, we would need to build a new indicator because there is <span class="math inline">\(1\)</span> pair in a three of a kind and <span class="math inline">\(2\)</span> pairs in a four of a kind. So let Three_of_a_kind be the random variable counting the number of three of a kinds in a hand. It can take values in [0,3] and let Four_of_a_kind be the random variable counting the number of four of a kind in a hand. It can take values in [0,2]. Our new indicator is thus</p>
+<p><span class="math display">\[All.Pairs = Pair+Three\_of\_a\_kind+2\cdot Four\_of\_a\_kind\]</span></p>
+<pre class="r"><code>Hidden.PAIR&lt;-Games %&gt;% mutate(
+  All.Pairs = Pair + Three_of_a_kind + 2*Four_of_a_kind
+) %&gt;% group_by(All.Pairs) %&gt;% summarise(Count=n(),Odds = n()/(4*Simulations))
+Hidden.PAIR %&gt;% kable(align=&quot;c&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="center">All.Pairs</th>
+<th align="center">Count</th>
+<th align="center">Odds</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">40</td>
+<td align="center">0.01</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">575</td>
+<td align="center">0.14</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">1602</td>
+<td align="center">0.40</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">1395</td>
+<td align="center">0.35</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">376</td>
+<td align="center">0.09</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">12</td>
+<td align="center">0.00</td>
+</tr>
+</tbody>
+</table>
+<p>As we can see, the difference in probabilities are huge because the pairs are very frequent.</p>
+<p>We can also notice that <span class="math inline">\(All.Pairs=0\)</span> has vanished. Indeed, as there are only 13 ranks and 13 cards in a hand, the probability to have no pairs at all is very small and our simulations did not simulate such a hand. In fact these rare hands have to have all 13 ranks, from A to K. Only the suits are random. We therefore have 4 choices for the first card that is A, then another 4 choices for the second card 2, 4 choices for 3, … 4 choices for K therefore :</p>
+<p><span class="math display">\[
+\mathbb{P}[PAIR=0] = \dfrac{(C_1^4)^{13}}{C_{13}^{52}} = 0.00011
+\]</span> So in other words, the 4 friends will need to play a whopping <span class="math inline">\(2500\)</span> games in order for someone to stumble upon a hand without a pair. Lastly, we can see that the probabilities are not only shifted upwards.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Pair</th>
+<th align="right">Simple</th>
+<th align="right">All</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.02</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">0.12</td>
+<td align="right">0.01</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">0.27</td>
+<td align="right">0.14</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">0.32</td>
+<td align="right">0.40</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">0.21</td>
+<td align="right">0.35</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">0.06</td>
+<td align="right">0.09</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+</tr>
+</tbody>
+</table>
+<p>So depending on your curiosity you might want to simulate the former or the latter Let’s now go over to the full houses which are once again a combination of a three of a kind and a pair. The simple version is pretty straight forward and is the minimum between the number of pairs and the number of three of a kinds because we need the same number of both of them to make a full house. <span class="math display">\[Full\_house = \min(Three\_of\_a\_kind,Pair)\]</span></p>
+<pre class="r"><code>Games %&gt;% mutate(
+  Full_houses = pmin(Pair,Three_of_a_kind)
+) %&gt;% group_by(Full_houses) %&gt;% summarise(Count=n(),Odds = n()/(4*Simulations))%&gt;% kable(align=&quot;c&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Full_houses</th>
+<th align="center">Count</th>
+<th align="center">Odds</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">2212</td>
+<td align="center">0.55</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">1691</td>
+<td align="center">0.42</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">97</td>
+<td align="center">0.02</td>
+</tr>
+</tbody>
+</table>
+<p>As expected, there’s a more complicated version that takes into account the three/four of a kinds. For this, I designed a function that works like this :</p>
+<p>For a certain hand of 13 cards</p>
+<ul>
+<li>All pairs and three of a kinds are matched up</li>
+<li>If we still have three of a kinds, which means that there are less pairs than three of a kinds, we will look for three and four of a kinds in order the break them down into pairs.</li>
+<li>If at this stage we still have four of a kinds, we will then break them into three of a kinds.</li>
+</ul>
+<p>For example, let’s take a look at this hand :</p>
+<ul>
+<li>2 four of a kinds <span class="math inline">\(\rightarrow\)</span> 8 cards</li>
+<li>1 three of a kind <span class="math inline">\(\rightarrow\)</span> 3 cards</li>
+<li>1 pair <span class="math inline">\(\rightarrow\)</span> 2 cards</li>
+</ul>
+<p>The pair will be matched up with the three of a kind to make the first full house. The 2 four of a kinds will be broken down into 2 pairs and 1 three of a kind so we can build a full house. This hands has therefore 2 full houses. By the way, the maximum number of full houses in a hand is 2 because we only have 13 cards per hand.</p>
+<pre class="r"><code>full_house_count&lt;-function(Two,Three,Four){
+
+# we need *Three* pairs, so we will need to convert the Three/Four_of_a_kind to pairs if there are not enough pairs
+  Simple.FH&lt;-pmin(Two,Three)
+  # How many Three do we have
+  Threes.remaining&lt;-pmax(0,Three-Two)
+  # We can break down Threes
+  Broken.Threes&lt;-(Threes.remaining)%/%2 #
+  Threes.remaining&lt;-Threes.remaining-Broken.Threes
+  
+  # Convert Fours into pairs
+  pairs.converted.3 &lt;- pmin(Four*2,Threes.remaining) # we have Four*2 pairs and need Threes.remaining pairs
+  Three_of_a_kind = Simple.FH+Broken.Threes+pairs.converted.3
+  pairs.remaining.4 &lt;- (2*Four-pairs.converted.3) # We substract the converted pairs from the Four_of_a_kind
+  Four_of_a_kind&lt;-pairs.remaining.4%/%3 # We then divide this by 3 to find the number of remaining Full Houses built on Four_of_a_kind e.g. AA,AA, KK =&gt; can be built into one Full House (AAA,KK) and AA,AA,KK,KK,DD,DD =&gt; can be built into 2 Full Houses (AAA,DD) and (KKK,DD)
+  Three_of_a_kind+Four_of_a_kind
+  
+}
+
+Games %&gt;% mutate(
+  All.Full_houses = full_house_count(Pair,Three_of_a_kind,Four_of_a_kind)
+) %&gt;% group_by(All.Full_houses) %&gt;% summarise(Count=n(),Odds = n()/(4*Simulations))%&gt;% kable(align=&quot;c&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="center">All.Full_houses</th>
+<th align="center">Count</th>
+<th align="center">Odds</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">2164</td>
+<td align="center">0.54</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">1737</td>
+<td align="center">0.43</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">99</td>
+<td align="center">0.02</td>
+</tr>
+</tbody>
+</table>
+<p>The differences between these two indicators are not massive due to the rareness of the three/four of a kinds.</p>
+<div id="results" class="section level4">
+<h4>Results</h4>
+<p>What interested me most was the probability to get <strong>at least one</strong> subset of cards. According to these simulations, we can see that</p>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">Pairs</td>
+<td align="right">1.00</td>
+</tr>
+<tr class="even">
+<td align="left">Three_of_a_kinds</td>
+<td align="right">0.49</td>
+</tr>
+<tr class="odd">
+<td align="left">Full_houses</td>
+<td align="right">0.46</td>
+</tr>
+<tr class="even">
+<td align="left">Four_of_a_kinds</td>
+<td align="right">0.04</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="same-suit" class="section level3">
+<h3>Same suit</h3>
+<p>This section is the same and a lot more easier because there are no three of a kind etc. So, let SUIT be the random variable counting the number of cards with the same suit. SUIT can take values in <span class="math inline">\([1,13]\)</span>. So the lower bound is <span class="math inline">\(1\)</span> because obviously there has to be a least one suit and the upper bound is <span class="math inline">\(13\)</span> because every card could be of the same suit. There’s at least one flush when (SUIT &gt; 4), there’s even a rare occurence when the hand has 2 flushes of the same suit (SUIT &gt; 9). I just need to modify my code a little in order take this into account.</p>
+<pre class="r"><code>one.game&lt;-function(deck,shuffle,i){
+  shuffle %&gt;% deck[.,] %&gt;% mutate(Player=dist) %&gt;% group_by(Player,Suit) %&gt;% summarise(n=n()) %&gt;% group_by(Player) %&gt;%
+    summarise(
+      Flush = sum(n&gt;4 &amp; n&lt;10), # only one flush
+      Flushx2 = sum(n&gt;9), # 2 flushes (most tricky part)
+      Flushes = Flush+Flushx2*2,
+      Game=i
+    )
+}
+
+cl&lt;-makeCluster(4)
+registerDoParallel(cl)
+set.seed(1)
+Games.suit&lt;-foreach(game=1:Simulations,.combine=rbind.data.frame,.packages=&quot;tidyverse&quot;)%dopar%{
+  one.game(deck,shuffles[[game]],game)
+}
+
+stopCluster(cl)
+
+Games.suit</code></pre>
+<pre><code>## # A tibble: 4,000 x 5
+##         Player Flush Flushx2 Flushes  Game
+##         &lt;fctr&gt; &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt; &lt;int&gt;
+##  1     Alibaba     1       0       1     1
+##  2       Baidu     1       0       1     1
+##  3 Chinamobile     1       0       1     1
+##  4        Didi     0       0       0     1
+##  5     Alibaba     1       0       1     2
+##  6       Baidu     1       0       1     2
+##  7 Chinamobile     1       0       1     2
+##  8        Didi     0       0       0     2
+##  9     Alibaba     1       0       1     3
+## 10       Baidu     1       0       1     3
+## # ... with 3,990 more rows</code></pre>
+<pre class="r"><code>Games.suit %&gt;% group_by(Flushes) %&gt;% summarise(
+  Odds=n()/(4*Simulations)
+) %&gt;% kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Flushes</th>
+<th align="right">Odds</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.37</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">0.57</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">0.05</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="the-sequences" class="section level3">
+<h3>The sequences</h3>
+<p>Now if we want to calculate the odds of a straight, this might be a little more tricky. I designed a function that checks for every unique rank if a sequence can be built. Obviously when the numbers of unique ranks are less than 5, we cannot build a straight. If there are more than 5 cards we can look for the difference by substracting the rank from the next rank, 5 ranks at a time. If there is a set of 5 ranks that meet the condition (difference = 1 for all 5 cards), we consider that there’s at least one <em>straight</em>.</p>
+<pre class="r"><code>is.seq&lt;-function(C){
+  l&lt;-length(C)
+  if(l&lt;5) return(F)
+  idx&lt;-1:4
+  (0:(l-5)) %&gt;% map(`+`,idx) %&gt;%  map(.f=function(x) all((C[x+1]-C[x])==1)) %&gt;% unlist %&gt;% any
+}
+
+# example
+is.seq(1:13)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.seq(c(1,3,5,6,7,8,10,12))</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>This function seems to be functional, let’s apply this to the 1000 games.</p>
+<pre class="r"><code>one.game&lt;-function(deck,shuffle,i){
+  shuffle %&gt;% deck[.,] %&gt;% mutate(Player=dist) %&gt;% group_by(Player,Rank) %&gt;% summarise(n=n()) %&gt;%
+  group_by(Player) %&gt;% summarise(straight=is.seq(as.integer(Rank)),
+                                 Game=i
+                                 )
+  }
+
+cl&lt;-makeCluster(4)
+registerDoParallel(cl)
+
+Games.straight&lt;-foreach(game=1:Simulations,.combine=rbind.data.frame,.packages=&quot;tidyverse&quot;)%dopar%{one.game(deck,shuffles[[game]],game)}
+
+stopCluster(cl)
+
+Games.straight %&gt;% group_by(Player) %&gt;% summarise(
+  Straight_prob=sum(straight)/(Simulations)
+) %&gt;% kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Player</th>
+<th align="right">Straight_prob</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Alibaba</td>
+<td align="right">0.53</td>
+</tr>
+<tr class="even">
+<td align="left">Baidu</td>
+<td align="right">0.52</td>
+</tr>
+<tr class="odd">
+<td align="left">Chinamobile</td>
+<td align="right">0.52</td>
+</tr>
+<tr class="even">
+<td align="left">Didi</td>
+<td align="right">0.52</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="convergence-and-final-result" class="section level2">
+<h2>Convergence and Final Result</h2>
+<p>We can now finally see whether our results converge after <span class="math inline">\(n\)</span> simulations.</p>
+<p><img src="/post/2018-01-01-monte-carlo-casino_files/figure-html/convergence-1.png" width="672" /></p>
+<p>So up until 500 simulations, the estimations are very volatile. As you can see after around 1500 simulations our probabilities seem to settle down and converge to some value.</p>
+<p>Last but not least, here’s our results in a table :</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Subset</th>
+<th align="right">P[Subset&gt;0] (estimated)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Three of a kind : e.g. AAA</td>
+<td align="right">0.49</td>
+</tr>
+<tr class="even">
+<td align="left">Straight : e.g. (10,J,Q,K,A)</td>
+<td align="right">0.52</td>
+</tr>
+<tr class="odd">
+<td align="left">Flush : e.g. ♠♠♠♠♠</td>
+<td align="right">0.63</td>
+</tr>
+<tr class="even">
+<td align="left">Full house : e.g. KKK+QQ</td>
+<td align="right">0.46</td>
+</tr>
+<tr class="odd">
+<td align="left">Four of a kind : e.g. 2222</td>
+<td align="right">0.04</td>
+</tr>
+</tbody>
+</table>
+<p>I’d except that the subset with a higher rank would come less frequently but as these simulations show, Flushes that can beat Straights are somehow relatively more frequent.</p>
+<p>But again, these simulations don’t take into account the fact that players mostly don’t want to break full houses or four of a kinds to make a flush.</p>
+<p>Thanks for reading, happy new year and I hope that you liked it!</p>
+<hr />
+<p><strong>Credits</strong></p>
+<ul>
+<li><a href="https://www.flaticon.com/free-icon/cards_469633#term=cards%20game&amp;page=2&amp;position=61">Icon</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Big_two#/media/File:People_playing_card_games_in_the_street.jpg">Cover</a></li>
+</ul>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/probabilities/">Probabilities</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/monte-carlo/">Monte Carlo</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/quantify-life/" data-tooltip="Quantify life ?">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/01/monte-carlo-casino/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/01/monte-carlo-casino/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/01/monte-carlo-casino/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Guanhua Li. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/quantify-life/" data-tooltip="Quantify life ?">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/01/monte-carlo-casino/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/01/monte-carlo-casino/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/01/monte-carlo-casino/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F01%2Fmonte-carlo-casino%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F01%2Fmonte-carlo-casino%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F01%2Fmonte-carlo-casino%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://image.flaticon.com/icons/svg/315/315061.svg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Guanhua Li</h4>
+    
+      <div id="about-card-bio">Been there, done that &hellip;</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Actuary in a digital world
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Luxembourg
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/01/monte-carlo-casino/">
+                <h3 class="media-heading">Monte Carlo Casino</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Several days ago, I was playing a chinese card game 鋤大D with a bunch of friends and I was wondering what were the different odds of obtaining certain sets of cards. So instead of calculating these probabilities, why not just estimate them ?
+The rules of the game Let me explain here briefly how this game works. We start with a shuffled deck of 52 cards and distribute them to 4 players, one by one, eventually everyone will have 13 cards.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2017/12/quantify-life/">
+                <h3 class="media-heading">Quantify life ?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Life insurance Classical life insurance is all about interest rate and mortality. Let’s take for example a whole life insurance contract which is basically a contract with a payment at the end of the year of death of the insured to the beneficiary, a good classical life insurance contract.
+In order to model this, we need to
+ model the future lifetime model the interest rates in order to discount this payment  Life actuaries use fancy notations to express their “things”, so in order to understand what’s going on let me list here some simple notations :</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2017/12/smith-wilson-yield-curves/">
+                <h3 class="media-heading">Smith-Wilson yield curves</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Let’s start this journey with the most basic, yet most important “parameters” of any solvency 2 calculations : the risk-free interest rate. EIOPA, the european insurance and occupational pensions authority uses the Smith-Wilson model to publish the relevant risk free interest rate term structures, also called the RFR.
+According to article 77 of the Solvency 2 directive, the best estimate of technical provisions shall correspond to the probability-weighted average of future cash-flows, taking account of the time value of money (expected present value of future cash-flows), using the relevant risk-free interest rate term structure.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2017/11/first/">
+                <h3 class="media-heading">Hello World</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">First post This post exists only for testing purposes.
+print(&quot;Hello World.&quot;) ## [1] &quot;Hello World.&quot; Guanhua.
+Credits : Icon made by Vectors Market.
+ </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         4 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-393451.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2018\/01\/monte-carlo-casino\/';
+          
+            this.page.identifier = '\/2018\/01\/monte-carlo-casino\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'gli-1';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    <script src="//yihui.name/js/math-code.js"></script>
+<script async
+src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+  </body>
+</html>
+

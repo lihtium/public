@@ -2,84 +2,102 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Guanhua Li</title>
-    <link>http://gli.lu/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Guanhua Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 25 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://gli.lu/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Insurance</title>
-      <link>http://gli.lu/tags/insurance/</link>
+      <link>/tags/insurance/</link>
       <pubDate>Mon, 25 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://gli.lu/tags/insurance/</guid>
+      <guid>/tags/insurance/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Interest Rate</title>
-      <link>http://gli.lu/tags/interest-rate/</link>
+      <link>/tags/interest-rate/</link>
       <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://gli.lu/tags/interest-rate/</guid>
+      <guid>/tags/interest-rate/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Life</title>
-      <link>http://gli.lu/tags/life/</link>
+      <link>/tags/life/</link>
       <pubDate>Mon, 25 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://gli.lu/tags/life/</guid>
+      <guid>/tags/life/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Lifecontingencies</title>
-      <link>http://gli.lu/tags/lifecontingencies/</link>
+      <link>/tags/lifecontingencies/</link>
       <pubDate>Mon, 25 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://gli.lu/tags/lifecontingencies/</guid>
+      <guid>/tags/lifecontingencies/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Luxembourg</title>
-      <link>http://gli.lu/tags/luxembourg/</link>
+      <link>/tags/luxembourg/</link>
       <pubDate>Mon, 25 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://gli.lu/tags/luxembourg/</guid>
+      <guid>/tags/luxembourg/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Me</title>
-      <link>http://gli.lu/tags/me/</link>
+      <link>/tags/me/</link>
       <pubDate>Sat, 11 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://gli.lu/tags/me/</guid>
+      <guid>/tags/me/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Monte Carlo</title>
+      <link>/tags/monte-carlo/</link>
+      <pubDate>Sun, 07 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/monte-carlo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Na</title>
-      <link>http://gli.lu/tags/na/</link>
+      <link>/tags/na/</link>
       <pubDate>Sat, 11 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://gli.lu/tags/na/</guid>
+      <guid>/tags/na/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Probabilities</title>
+      <link>/tags/probabilities/</link>
+      <pubDate>Sun, 07 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/probabilities/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Solvency 2</title>
-      <link>http://gli.lu/tags/solvency-2/</link>
+      <link>/tags/solvency-2/</link>
       <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://gli.lu/tags/solvency-2/</guid>
+      <guid>/tags/solvency-2/</guid>
       <description></description>
     </item>
     
